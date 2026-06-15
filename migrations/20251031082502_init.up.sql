@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS users (
 
 INSERT INTO `users` (`id`, `avatar`, `phone`, `username`, `nickname`, `company_id`, `passwd`, `salt`, `created_at`, `updated_at`, `deleted_at`)
 VALUES
-    ('1', '', '1', 'root', 'root', '0', '899b50b367e7f4e6b5cdbc4518637866', '22f1782a', '1761899465', '1761899465', '0');
+    ('1', '', '1', 'root', 'root', '0', '8268333839d28007ee75e66997860e2e', '22f1782a', '1761899465', '1761899465', '0');
 
 
 CREATE TABLE IF NOT EXISTS companys (

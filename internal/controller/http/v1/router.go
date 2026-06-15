@@ -109,6 +109,8 @@ func NewUserRoutes(
 		modelGroup.Get("/builtin_default", r.GetBuiltinDefaultModel)
 		modelGroup.Get("/builtin_defaults", r.GetAllBuiltinDefaults)
 		modelGroup.Get("/pricing", r.GetModelPricing)
+		modelGroup.Get("/apimart_key", r.getApimartKey)
+		modelGroup.Put("/apimart_key", r.setApimartKey)
 		modelGroup.Get("/:id", r.GetModelByID)
 		modelGroup.Put("/:id", r.UpdateModel)
 		modelGroup.Delete("/:id", r.DeleteModel)

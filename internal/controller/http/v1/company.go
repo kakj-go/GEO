@@ -38,6 +38,57 @@ func (r *V1) getCompanyByID(ctx *fiber.Ctx) error {
 	})
 }
 
+// @Summary     Get APIMart API key
+// @Description Get the current company's shared APIMart API key
+// @ID          get-apimart-key
+// @Tags        model
+// @Produce     json
+// @Success     200 {object} response.Success
+// @Failure     500 {object} response.Error
+// @Router      /model/apimart_key [get]
+func (r *V1) getApimartKey(ctx *fiber.Ctx) error {
+	key, err := r.company.GetAPIMartApiKey(ctx.UserContext())
+	if err != nil {
+		r.l.Error(err, "http - v1 - getApimartKey")
+		return errorResponse(ctx, http.StatusInternalServerError, "failed to get apimart api key")
+	}
+
+	return ctx.Status(http.StatusOK).JSON(response.Success{
+		Success: true,
+		Message: "get apimart api key completed",
+		Data:    fiber.Map{"api_key": key},
+	})
+}
+
+// @Summary     Set APIMart API key
+// @Description Set the current company's shared APIMart API key
+// @ID          set-apimart-key
+// @Tags        model
+// @Accept      json
+// @Produce     json
+// @Success     200 {object} response.Success
+// @Failure     400 {object} response.Error
+// @Failure     500 {object} response.Error
+// @Router      /model/apimart_key [put]
+func (r *V1) setApimartKey(ctx *fiber.Ctx) error {
+	var body struct {
+		ApiKey string `json:"api_key"`
+	}
+	if err := ctx.BodyParser(&body); err != nil {
+		return errorResponse(ctx, http.StatusBadRequest, "invalid request body")
+	}
+
+	if err := r.company.SetAPIMartApiKey(ctx.UserContext(), body.ApiKey); err != nil {
+		r.l.Error(err, "http - v1 - setApimartKey")
+		return errorResponse(ctx, http.StatusInternalServerError, "failed to set apimart api key")
+	}
+
+	return ctx.Status(http.StatusOK).JSON(response.Success{
+		Success: true,
+		Message: "apimart api key updated",
+	})
+}
+
 // @Summary     Create company
 // @Description Create a new company
 // @ID          create-company

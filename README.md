@@ -1,206 +1,118 @@
-# SuperLink — AI GEO / AIEO Content Engine
+# SuperLink — AI GEO / AIEO Desktop App
 
 > English | [简体中文](./README_CN.md)
 
-**SuperLink** is a self-hostable platform for **GEO (Generative Engine Optimization)** — also called **AIEO (AI Engine Optimization)**. It helps brands and creators get **cited and recommended by AI search engines and large language models** (ChatGPT, Perplexity, Doubao, Kimi, etc.).
+**SuperLink** is a desktop app for **GEO (Generative Engine Optimization)** — also called **AIEO (AI Engine Optimization)**. It helps brands and creators get **cited and recommended by AI search engines and large language models** (ChatGPT, Perplexity, Doubao, Kimi, etc.).
 
-The core idea: when users ask an AI a question, the AI answers from content it has ingested across the web. SuperLink generates high-quality, LLM-friendly articles around your **target keywords**, then publishes them across a **matrix of content platforms** so that AI models are more likely to reference your brand when answering related questions.
+The idea: when users ask an AI a question, the AI answers from content it has ingested across the web. SuperLink generates high-quality, LLM-friendly articles around your **target keywords**, then publishes them across a **matrix of content platforms** so AI models are more likely to reference your brand.
 
 ---
 
 ## ✨ Features
 
-### 🎯 GEO / AIEO Content Generation
-- **User-question mining** — Given a keyword and a target word, the LLM generates the real questions users are likely to ask an AI, so your content covers the queries that matter.
-- **Article generation** — Produces clean, structured Markdown articles from your target words, mined questions, a **knowledge base**, and **reference images**, designed to be easily ingested and quoted by LLMs.
-- **Knowledge-base & image grounding** — Articles are grounded on your own material library and asset library, with images embedded at the right positions.
-- **Deduplication** — New articles are checked against previously generated synopses to avoid repetition.
-
-### 🌐 Multi-Platform Publishing Matrix
-Publish generated content across a wide range of Chinese and international content platforms to maximize AI ingestion surface:
-
-| | Platforms |
-|---|---|
-| **Q&A / Blog** | Zhihu (知乎), CSDN |
-| **News / Self-media** | Toutiao (今日头条), Baijiahao (百家号), Sohu (搜狐号), NetEase (网易号), Qi'e (企鹅号), WeChat (微信) |
-| **Video / Social** | Bilibili, Douyin (抖音), Kuaishou (快手), Xiaohongshu (小红书), TikTok |
-
-- **Send tasks** with per-platform, per-account delivery status tracking (Waiting / Success / Failed).
-- **Video jobs** for publishing video content to social platforms.
-- **Login-context management** — store and reuse per-platform login authorizations so publishing is one click.
-
-### ✍️ Copywriting Assistant
-- **Streaming, chat-based** planning/copywriting expert (SSE) with reasoning output.
-- **Skill templates** for vertical industries (e.g. homestay/hotel operations) that enforce structured, high-quality plan output.
-- **File management** — versioned files per session, with recover, update, download.
-
-### 🤖 Model Management
-- Manage multiple **LLM** and **embedding** model providers and credentials (API key / AK-SK).
-- Per-company **default model**, built-in default models, connectivity testing, and **token-based pricing**.
-
-### 🏢 Multi-Tenant & Billing
-- **Company / user** management with role-based access and JWT auth.
-- **Balance, recharge, transactions, usage logs**, and detailed **points-based billing** per model usage.
-
-### 🖥️ Interfaces
-- **REST API** (Fiber v2) with optional **Swagger** docs and **Prometheus** metrics.
-- **Desktop app** (React + Electron) for Windows and macOS that bundles the Go backend.
+- **GEO / AIEO content generation** — mine the real questions users ask AI, then generate clean, LLM-friendly Markdown articles grounded on your knowledge base and images.
+- **Multi-platform publishing matrix** — one-click publish to Zhihu, Toutiao, Baijiahao, Sohu, NetEase, Qi'e, WeChat, CSDN, Bilibili, Douyin, Kuaishou, Xiaohongshu, TikTok, with per-platform/per-account delivery tracking.
+- **Copywriting assistant** — streaming chat-based planning/copywriting expert with industry skill templates and versioned files.
+- **Model management** — add your own LLM / embedding providers, set a default, test connectivity, and track token-based usage.
+- **Self-contained** — bundles its own backend and an embedded database; nothing else to install.
 
 ---
 
-## 🧱 Tech Stack
+## ⬇️ Download & Install
 
-| Layer | Technology |
+Grab the latest installer from the **[Releases page](https://github.com/kakj-go/GEO/releases/latest)**:
+
+| Platform | File |
 |---|---|
-| Language | Go 1.25 |
-| Web framework | [Fiber v2](https://github.com/gofiber/fiber) |
-| Database | MySQL 8 (with `golang-migrate` migrations) |
-| Auth | JWT |
-| LLM gateway | APIMart-compatible API |
-| Observability | Prometheus metrics, zerolog / zap logging |
-| Frontend | React + Electron (desktop) |
-| Architecture | Clean Architecture (`entity` → `usecase` → `repo` → `controller`) |
+| 🪟 **Windows** | `SuperLink Setup x.y.z.exe` |
+| 🍎 **macOS (Apple Silicon)** | `SuperLink-x.y.z-arm64.dmg` |
+| 🍎 **macOS (Intel)** | `SuperLink-x.y.z.dmg` |
 
-Project layout:
+**Windows** — run the `.exe`, choose an install location, and finish. A desktop / Start-menu shortcut is created.
 
-```
-cmd/app            # application entrypoint
-config/            # env-based configuration + pricing.yaml
-internal/
-  controller/http  # Fiber routes, middleware, request/response DTOs
-  usecase/         # business logic (aieo_generate, copywriting, model, billing, ...)
-  repo/            # persistence (MySQL / SQLite)
-  entity/          # domain entities
-migrations/        # SQL migrations
-pkg/               # shared libraries (llm, logger, mysql, httpserver, ...)
-front/             # React + Electron desktop app
-```
+**macOS** — open the `.dmg` and drag **SuperLink** into **Applications**.
+
+> The builds are **unsigned**. On first launch you'll see a warning:
+> - **Windows**: SmartScreen → *More info* → *Run anyway*.
+> - **macOS**: right-click the app → **Open** → **Open** (or *System Settings ▸ Privacy & Security ▸ Open Anyway*).
 
 ---
 
-## 🚀 Deployment
+## 🚀 First-Time Use
 
-### Option A — Docker Compose (recommended)
+The app starts its own backend automatically — **no MySQL, no server setup**. Data is stored locally in an embedded SQLite database (`database/data.db`, next to the app's resources).
 
-Spins up MySQL + the SuperLink API together.
+> 🔑 **Default login** — username **`root`**, password **`123456`**. Please change the password after your first login.
 
-```bash
-# 1. Copy and edit environment variables
-cp .env.docker .env
+1. **Launch** SuperLink.
+2. **Log in** with the default account `root` / `123456` (or initialize the system to create your own company + admin account).
+3. **Change the default password** in user settings.
+4. **Enter your APIMart API Key** in *模型管理器 (Model Manager)*. The built-in models all run through [APIMart](https://apimart.ai/) — paste the key, click Save, and every AI feature works. **No environment variables required.** Don't have a key yet? Get one at **https://apimart.ai/**.
+5. **Pick your default models** in the Model Manager (text / image / video).
+6. **Add platform logins** (optional) so you can publish — authorize each target platform once.
+7. **Generate & publish** — create a GEO task from your keywords, review the generated articles, then send them to your chosen platforms.
 
-# 2. Edit .env — at minimum set:
-#    APIMART_API_KEY   (your LLM API key — required)
-#    JWT_SECRET        (change to a strong secret)
-#    MYSQL_ROOT_PASSWORD
+> All configuration (APIMart key, models, platform logins) happens **inside the app** — you don't need environment variables at all.
 
-# 3. Build and start
-docker compose up -d --build
+---
 
-# 4. Check status / logs
-docker compose ps
-docker compose logs -f superlink
+## ⚙️ Environment Variables (optional)
+
+SuperLink works out of the box and the **APIMart key is configured in the app** (Model Manager), so you normally **don't need any environment variables**. They exist only for advanced tweaks. The bundled backend **inherits the operating-system environment**, so you set variables at the OS level **before launching the app**.
+
+| Variable | Description | Default |
+|---|---|---|
+| `APIMART_API_KEY` | Fallback API key for the built-in APIMart gateway ([get one](https://apimart.ai/)). Optional — the key entered in the Model Manager takes priority, so this is only a fallback. | — |
+| `JWT_SECRET` | Secret used to sign login tokens. | built-in default |
+| `LOG_LEVEL` | Log verbosity: `debug` / `info` / `warn` / `error`. | `info` |
+| `SWAGGER_ENABLED` | Expose the API docs at `http://localhost:8080/swagger/index.html`. | `false` |
+| `METRICS_ENABLED` | Expose Prometheus metrics. | `true` |
+| `DEBUG` | Enable debug mode. | `false` |
+
+> ⚠️ Do **not** change `HTTP_PORT`. The desktop UI talks to the backend on `localhost:8080`; changing the port breaks the app.
+
+### How to set them
+
+**Windows** (set a user variable, then restart the app):
+
+```powershell
+# PowerShell — persists for your user account
+setx APIMART_API_KEY "your-key-here"
+setx LOG_LEVEL "debug"
+# Close and reopen SuperLink so it picks up the new values.
 ```
 
-The API will be available at `http://localhost:8080`. MySQL data and uploaded assets are persisted in named Docker volumes (`mysql_data`, `superlink_assets`). Database migrations run automatically on first start.
+Or via **Settings ▸ System ▸ About ▸ Advanced system settings ▸ Environment Variables**.
 
-### Option B — Run locally from source
-
-Requirements: **Go 1.25+**, a running **MySQL 8** instance, and `make`.
+**macOS** (launch with the variables set, e.g. from Terminal):
 
 ```bash
-# 1. Configure environment
-cp .env.docker .env
-# Edit .env and set MYSQL_URL to your local MySQL, e.g.:
-#   MYSQL_URL=root:password@tcp(127.0.0.1:3306)/geo?charset=utf8mb4&parseTime=True&loc=Local
-# Also set APIMART_API_KEY and JWT_SECRET.
-
-# 2. Install build tools (golang-migrate, swag, mockgen, ...)
-make bin-deps
-
-# 3. Run migrations
-make migrate-up        # requires MYSQL_MIGRATE_URL in .env
-
-# 4. Generate Swagger docs and run the server
-make run
+APIMART_API_KEY="your-key-here" LOG_LEVEL="debug" \
+  open -a SuperLink
 ```
 
-`make run` regenerates dependencies + Swagger and starts the API on `HTTP_PORT` (default `8080`).
+To set them permanently, add the `export` lines to your shell profile (`~/.zshrc`) or use a `launchctl setenv` entry, then relaunch.
 
-### Option C — Desktop app (Electron)
+---
 
-The `front/` directory contains a React + Electron app that bundles the Go backend into a single desktop application.
+## 🩺 Troubleshooting
+
+- **AI features do nothing / errors** — make sure a model is configured and its connectivity test passes in *Model Management* (or that `APIMART_API_KEY` is set).
+- **Logs** — for diagnosing issues, check the runtime log:
+  - **Windows**: `%APPDATA%\superlink\logs\run.log`
+  - **macOS**: `~/Library/Application Support/superlink/logs/run.log`
+- **Reset everything** — quit the app and delete the local `database/data.db` (this erases all local data).
+
+---
+
+## 🧑‍💻 Build from Source
+
+Building the desktop installers (and producing macOS builds, which require macOS) is automated via GitHub Actions on tag push — see [.github/workflows/release.yml](.github/workflows/release.yml). To build the Windows app locally:
 
 ```bash
 cd front
 npm install
-
-npm run dist-win      # build a Windows installer (backend + UI)
-npm run mac-ui        # build a macOS (arm64) UI-only package
-```
-
-Output installers are written to `front/release/`.
-
----
-
-## ⚙️ Configuration
-
-All configuration is environment-variable based (see `.env.docker` for the full list). Key settings:
-
-| Variable | Description | Default |
-|---|---|---|
-| `APIMART_API_KEY` | LLM gateway API key (**required**) | — |
-| `MYSQL_URL` | MySQL DSN | — |
-| `HTTP_PORT` | API listen port | `8080` |
-| `JWT_SECRET` | JWT signing secret (**change in production**) | — |
-| `APP_HOST` | Public base URL of the app | `http://localhost:8080` |
-| `APP_ASSETS_LIBRARY_PATH` | Local path for uploaded assets | `./assets` |
-| `LOG_LEVEL` | Log level (`debug`/`info`/...) | `info` |
-| `METRICS_ENABLED` | Expose Prometheus metrics | `true` |
-| `SWAGGER_ENABLED` | Expose Swagger UI at `/swagger/*` | `false` |
-| `DEBUG` | Debug mode | `false` |
-
----
-
-## 🔑 First-Time Setup
-
-After the service is running:
-
-1. Check init status — `GET /v1/auth/init`
-2. Initialize the system (creates the first company + admin user) — `POST /v1/auth/init`
-3. Log in — `POST /v1/auth/login` → returns a JWT
-4. Configure an LLM model — `POST /v1/model` and set it as default
-5. (Optional) Add platform login contexts, upload assets, and start generating AIEO content
-
-> When `SWAGGER_ENABLED=true`, browse the full API at `http://localhost:8080/swagger/index.html`.
-
----
-
-## 📡 Core API Groups
-
-All endpoints are under `/v1`. Highlights:
-
-- `/v1/auth` — system init, login
-- `/v1/user`, `/v1/company` — users, companies, balance, recharge, usage logs
-- `/v1/model` — model CRUD, default model, connectivity test, pricing
-- `/v1/aieo_generate` — create generation tasks, mine user questions, start/track publishing
-- `/v1/copywriting` — chat sessions (streaming), files, skills
-- `/v1/video_job` — video publishing tasks
-- `/v1/assets_library`, `/v1/material_library` — assets (images/video) and knowledge base
-- `/v1/website_login_context` — per-platform login authorizations
-
----
-
-## 🛠️ Development
-
-```bash
-make deps              # tidy + verify modules
-make swag-v1           # regenerate Swagger docs
-make mock              # regenerate mocks
-make format            # gofumpt + gci
-make linter-golangci   # lint
-make test              # unit tests (race + coverage)
-make integration-test  # integration tests
-make pre-commit        # run the full pre-commit pipeline
+npm run dist-win     # → front/release/
 ```
 
 ---

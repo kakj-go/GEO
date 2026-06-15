@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Tag, message, Typography, Button, Space, Divider } from 'antd';
+import { Tag, message, Typography, Button, Space, Divider, Input } from 'antd';
 import { 
     CheckCircleFilled, 
     StarFilled, 
@@ -28,6 +28,8 @@ const Model = () => {
     const [expandedSection, setExpandedSection] = useState(null); 
     const [pricing, setPricing] = useState({});
     const [llmModels, setLlmModels] = useState(LLM_MODELS);
+    const [apimartKey, setApimartKey] = useState('');
+    const [savingKey, setSavingKey] = useState(false);
 
     const CATEGORY_INFO = {
         image_generation: {
@@ -66,13 +68,18 @@ const Model = () => {
     const fetchData = async () => {
         setLoading(true);
         try {
-            const [defaultsRes, pricingRes] = await Promise.all([
+            const [defaultsRes, pricingRes, apimartKeyRes] = await Promise.all([
                 modelApi.getAllBuiltinDefaults(),
-                modelApi.getModelPricing()
+                modelApi.getModelPricing(),
+                modelApi.getApimartKey().catch(() => null)
             ]);
-            
+
             if (defaultsRes.data) {
                 setDefaults(defaultsRes.data);
+            }
+
+            if (apimartKeyRes && apimartKeyRes.data) {
+                setApimartKey(apimartKeyRes.data.api_key || '');
             }
             
             if (pricingRes.success && pricingRes.data) {
@@ -95,6 +102,19 @@ const Model = () => {
             console.log('加载数据失败:', error);
         } finally {
             setLoading(false);
+        }
+    };
+
+    const handleSaveApimartKey = async () => {
+        setSavingKey(true);
+        try {
+            await modelApi.setApimartKey(apimartKey.trim());
+            message.success('APIMart API Key 已保存');
+        } catch (error) {
+            message.error('保存 APIMart API Key 失败');
+            console.error('保存 APIMart API Key 失败:', error);
+        } finally {
+            setSavingKey(false);
         }
     };
 
@@ -221,6 +241,33 @@ const Model = () => {
             <div className="page-header">
                 <h2 className="page-title">模型管理器</h2>
                 <p className="page-desc">浏览并选择适合您创作需求的 AI 模型类别</p>
+            </div>
+
+            <div className="apimart-key-section" style={{
+                background: '#f8fafc',
+                border: '1px solid #e2e8f0',
+                borderRadius: '12px',
+                padding: '20px 24px',
+                marginBottom: '24px',
+            }}>
+                <div style={{ display: 'flex', alignItems: 'center', marginBottom: '6px' }}>
+                    <span style={{ fontSize: '15px', fontWeight: 600, color: '#0f172a' }}>APIMart API Key</span>
+                </div>
+                <p style={{ margin: '0 0 12px', color: '#64748b', fontSize: '13px' }}>
+                    内置模型统一通过 APIMart 调用。填写并保存 API Key 后即可直接使用，无需配置任何环境变量。
+                    还没有 Key？前往 <a href="https://apimart.ai/" target="_blank" rel="noopener noreferrer">https://apimart.ai/</a> 获取。
+                </p>
+                <Space.Compact style={{ width: '100%', maxWidth: '560px' }}>
+                    <Input.Password
+                        value={apimartKey}
+                        onChange={(e) => setApimartKey(e.target.value)}
+                        placeholder="请输入 APIMart API Key"
+                        autoComplete="off"
+                    />
+                    <Button type="primary" loading={savingKey} onClick={handleSaveApimartKey}>
+                        保存
+                    </Button>
+                </Space.Compact>
             </div>
 
             <div className="category-cards-container">

@@ -22,6 +22,22 @@ func New(r repo.CompanyRepo, userResp repo.UserRepo) *CompanyCase {
 	}
 }
 
+// GetAPIMartApiKey 获取当前公司配置的 APIMart API Key
+func (c CompanyCase) GetAPIMartApiKey(ctx context.Context) (string, error) {
+	companyID := ctx.Value(constants.CompanyID).(int64)
+	company, err := c.repo.GetCompanyByID(ctx, companyID)
+	if err != nil {
+		return "", fmt.Errorf("CompanyCase - GetAPIMartApiKey - repo.GetCompanyByID: %w", err)
+	}
+	return company.APIMartApiKey, nil
+}
+
+// SetAPIMartApiKey 设置当前公司的 APIMart API Key
+func (c CompanyCase) SetAPIMartApiKey(ctx context.Context, apiKey string) error {
+	companyID := ctx.Value(constants.CompanyID).(int64)
+	return c.repo.UpdateAPIMartApiKey(ctx, companyID, apiKey)
+}
+
 func (c CompanyCase) GetCompanyByID(ctx context.Context, id int64) (*entity.Company, error) {
 	dbUser, err := c.userResp.GetUserByID(ctx, ctx.Value(constants.UserID).(int64))
 	if err != nil {

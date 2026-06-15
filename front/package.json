@@ -1,6 +1,6 @@
 {
   "name": "superlink",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "SuperLink",
   "main": "public/electron.js",
   "homepage": "./",

@@ -61,10 +61,11 @@ type Usage struct {
 func Chat(ctx context.Context, model *ModelInfo, prompt string, user string) (string, *TokenUsage, error) {
 	url := "https://api.apimart.ai/v1/chat/completions"
 
-	// Get API Key from config
-	apiKey := config.GetConfig().APIMart.ApiKey
+	// 优先使用调用方解析好的 Key（公司在模型管理器中配置的 APIMart Key 或模型自带 Key），
+	// 仅当为空时回退到环境变量 APIMART_API_KEY。
+	apiKey := model.ApiKey
 	if apiKey == "" {
-		apiKey = model.ApiKey // Fallback to model.ApiKey if config is empty
+		apiKey = config.GetConfig().APIMart.ApiKey
 	}
 
 	messages := []map[string]interface{}{}
@@ -206,12 +207,16 @@ type streamChunkResponse struct {
 // ChatStream performs a streaming chat completion call.
 // messages should be the full conversation history as []map[string]interface{} with "role" and "content".
 // onChunk is called for each content delta received; return an error to abort.
-func ChatStream(ctx context.Context, modelName string, messages []map[string]interface{}, onChunk func(delta StreamDelta) error) (*TokenUsage, error) {
+func ChatStream(ctx context.Context, modelName string, apiKey string, messages []map[string]interface{}, onChunk func(delta StreamDelta) error) (*TokenUsage, error) {
 	url := "https://api.apimart.ai/v1/chat/completions"
 
-	apiKey := config.GetConfig().APIMart.ApiKey
+	// 优先使用调用方解析好的 Key（公司在模型管理器中配置的 APIMart Key），
+	// 为空时回退到环境变量 APIMART_API_KEY。
 	if apiKey == "" {
-		return nil, fmt.Errorf("APIMart API Key 未配置")
+		apiKey = config.GetConfig().APIMart.ApiKey
+	}
+	if apiKey == "" {
+		return nil, fmt.Errorf("APIMart API Key 未配置，请在模型管理器中配置 APIMart API Key")
 	}
 
 	reqBody := map[string]interface{}{

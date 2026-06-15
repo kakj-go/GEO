@@ -262,6 +262,15 @@ func (uc *AIEOGenerate) GetAIEOGeneratesWithPage(ctx context.Context, name, keyw
 	}, nil
 }
 
+// resolveAPIKey 解析 APIMart Key：优先使用公司在模型管理器中配置的 Key，其次使用模型自带 Key，
+// 若两者都为空则由 llm 层回退到环境变量 APIMART_API_KEY。
+func (uc *AIEOGenerate) resolveAPIKey(ctx context.Context, companyID int64, modelKey string) string {
+	if company, err := uc.companyRepo.GetCompanyByID(ctx, companyID); err == nil && company != nil && company.APIMartApiKey != "" {
+		return company.APIMartApiKey
+	}
+	return modelKey
+}
+
 // GenerateAIEOUserQuestion generate aieo user question
 func (uc *AIEOGenerate) GenerateAIEOUserQuestion(ctx context.Context, keyword, targetWord string, historyQuestions []string) (userQuestions []string, err error) {
 	companyID := ctx.Value(constants.CompanyID).(int64)
@@ -290,7 +299,7 @@ func (uc *AIEOGenerate) GenerateAIEOUserQuestion(ctx context.Context, keyword, t
 		EndpointID:      model.EndpointID,
 		ModelName:       model.ModelName,
 		BaseModel:       model.BaseModel,
-		ApiKey:          model.Credential.ApiKey,
+		ApiKey:          uc.resolveAPIKey(ctx, companyID, model.Credential.ApiKey),
 		MaxToken:        model.ContextLength,
 		Temperature:     0,
 	}
@@ -438,7 +447,7 @@ func (uc *AIEOGenerate) generateContents(id int64) {
 		EndpointID:      model.EndpointID,
 		ModelName:       model.ModelName,
 		BaseModel:       model.BaseModel,
-		ApiKey:          model.Credential.ApiKey,
+		ApiKey:          uc.resolveAPIKey(context.Background(), generate.CompanyID, model.Credential.ApiKey),
 		MaxToken:        model.ContextLength,
 		Temperature:     0,
 	}

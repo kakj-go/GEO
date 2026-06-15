@@ -135,6 +135,7 @@ func Run(cfg *config.Config) {
 	copywritingUserCase := copywritingCase.New(
 		copywritingRepo,
 		modelRepo,
+		companyRepo,
 		billingUserCase,
 		l,
 	)

@@ -68,7 +68,7 @@ function createWindow() {
     mainWindow.once('ready-to-show', () => {
         logger.log('Window ready to show');
         mainWindow.show();
-        mainWindow.webContents.openDevTools();
+        // 默认不自动打开开发者工具（控制台），如需调试可通过 toggle-devtools 手动开启
     });
 
     mainWindow.on('closed', () => {

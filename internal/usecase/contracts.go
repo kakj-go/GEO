@@ -47,6 +47,10 @@ type (
 
 		UpdateCompany(ctx context.Context, company *entity.Company) error
 
+		GetAPIMartApiKey(ctx context.Context) (string, error)
+
+		SetAPIMartApiKey(ctx context.Context, apiKey string) error
+
 		AddCompanyBalance(ctx context.Context, id int64, addBalance int64) error
 
 		DeleteCompanyBalance(ctx context.Context, id int64, deleteBalance int64) error

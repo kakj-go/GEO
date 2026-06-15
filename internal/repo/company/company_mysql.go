@@ -19,7 +19,7 @@ func NewCompanyRepo(db *mysql.MySQL) *CompanyRepo {
 
 func (c CompanyRepo) GetCompanyByID(ctx context.Context, id int64) (*entity.Company, error) {
 	sql, args, err := c.Builder.
-		Select("id, name, avatar, industry, phone, brand_name, brand_positioning, region, address_detail, balance, manager_user_id, created_at, updated_at").
+		Select("id, name, avatar, industry, phone, brand_name, brand_positioning, region, address_detail, balance, apimart_api_key, manager_user_id, created_at, updated_at").
 		From("companys").
 		Where("id = ?", id).
 		ToSql()
@@ -30,7 +30,7 @@ func (c CompanyRepo) GetCompanyByID(ctx context.Context, id int64) (*entity.Comp
 	row := c.DB.QueryRowContext(ctx, sql, args...)
 
 	company := &entity.Company{}
-	err = row.Scan(&company.ID, &company.Name, &company.Avatar, &company.Industry, &company.Phone, &company.BrandName, &company.BrandPositioning, &company.Region, &company.AddressDetail, &company.Balance, &company.ManagerUserId,
+	err = row.Scan(&company.ID, &company.Name, &company.Avatar, &company.Industry, &company.Phone, &company.BrandName, &company.BrandPositioning, &company.Region, &company.AddressDetail, &company.Balance, &company.APIMartApiKey, &company.ManagerUserId,
 		&company.CreatedAt, &company.UpdatedAt)
 	if err != nil {
 		return nil, fmt.Errorf("CompanyRepo - GetCompanyByID - row.Scan: %w", err)
@@ -100,6 +100,33 @@ func (c CompanyRepo) UpdateCompany(ctx context.Context, company *entity.Company)
 
 	if rowsAffected == 0 {
 		return fmt.Errorf("CompanyRepo - UpdateCompany - company not found or already deleted")
+	}
+	return nil
+}
+
+func (c CompanyRepo) UpdateAPIMartApiKey(ctx context.Context, id int64, apiKey string) error {
+	sql, args, err := c.Builder.
+		Update("companys").
+		Set("apimart_api_key", apiKey).
+		Set("updated_at", time.Now().Unix()).
+		Where("id = ?", id).
+		ToSql()
+	if err != nil {
+		return fmt.Errorf("CompanyRepo - UpdateAPIMartApiKey - r.Builder: %w", err)
+	}
+
+	result, err := c.DB.ExecContext(ctx, sql, args...)
+	if err != nil {
+		return fmt.Errorf("CompanyRepo - UpdateAPIMartApiKey - r.DB.Exec: %w", err)
+	}
+
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		return fmt.Errorf("CompanyRepo - UpdateAPIMartApiKey - result.RowsAffected: %w", err)
+	}
+
+	if rowsAffected == 0 {
+		return fmt.Errorf("CompanyRepo - UpdateAPIMartApiKey - company not found or already deleted")
 	}
 	return nil
 }

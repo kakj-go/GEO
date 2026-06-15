@@ -38,16 +38,18 @@ type Skill struct {
 type CopywritingUseCase struct {
 	repo        repo.CopywritingRepo
 	modelRepo   repo.ModelRepo
+	companyRepo repo.CompanyRepo
 	billingCase usecase.Billing
 	l           logger.Interface
 	skills      []Skill
 }
 
 // New 创建 CopywritingUseCase
-func New(repo repo.CopywritingRepo, modelRepo repo.ModelRepo, billingCase usecase.Billing, l logger.Interface) *CopywritingUseCase {
+func New(repo repo.CopywritingRepo, modelRepo repo.ModelRepo, companyRepo repo.CompanyRepo, billingCase usecase.Billing, l logger.Interface) *CopywritingUseCase {
 	uc := &CopywritingUseCase{
 		repo:        repo,
 		modelRepo:   modelRepo,
+		companyRepo: companyRepo,
 		billingCase: billingCase,
 		l:           l,
 	}
@@ -441,7 +443,15 @@ func (uc *CopywritingUseCase) ChatStream(
 	var fullContent strings.Builder
 	startTime := time.Now()
 
-	usage, err := llm.ChatStream(ctx, modelID, messages, func(delta llm.StreamDelta) error {
+	// 解析 APIMart Key：优先使用公司在模型管理器中配置的 Key，为空则由 llm 层回退到环境变量。
+	var apiKey string
+	if uc.companyRepo != nil {
+		if company, cerr := uc.companyRepo.GetCompanyByID(ctx, companyID); cerr == nil && company != nil {
+			apiKey = company.APIMartApiKey
+		}
+	}
+
+	usage, err := llm.ChatStream(ctx, modelID, apiKey, messages, func(delta llm.StreamDelta) error {
 		if delta.Content != "" || delta.ReasoningContent != "" {
 			fullContent.WriteString(delta.Content)
 			chunkType := "content"

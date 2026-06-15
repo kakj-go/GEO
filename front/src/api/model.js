@@ -32,3 +32,13 @@ export const getDefaultModel = async (modelType = 'llm') => {
         params: { model_type: modelType }
     });
 };
+
+// 获取 APIMart API Key
+export const getApimartKey = async () => {
+    return await api.get('/v1/model/apimart_key');
+};
+
+// 设置 APIMart API Key
+export const setApimartKey = async (apiKey) => {
+    return await api.put('/v1/model/apimart_key', { api_key: apiKey });
+};
