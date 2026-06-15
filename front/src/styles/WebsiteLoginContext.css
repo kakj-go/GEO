@@ -1,0 +1,126 @@
+/* src/styles/WebsiteLoginContext.css */
+.website-login-context {
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Filter area styling to match premium form */
+.filter-row {
+    margin-bottom: 24px;
+    padding: 24px;
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #f1f5f9;
+}
+
+.filter-row .ant-form-item-label > label {
+    font-weight: 600 !important;
+    color: #334155 !important;
+    font-size: 13px !important;
+}
+
+/* Custom Input inside form to match styling */
+.custom-input {
+    height: 44px !important;
+    border-radius: 8px !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: none !important;
+    background: #f8fafc !important;
+    color: #334155 !important;
+    font-size: 14px !important;
+    padding: 0 16px !important;
+}
+
+.custom-input:focus, .custom-input:hover {
+    border-color: #2563eb !important;
+    background: #ffffff !important;
+}
+
+/* Select overrides */
+.custom-select-override .ant-select-selector {
+    height: 44px !important;
+    border-radius: 8px !important;
+    border: 1px solid #e2e8f0 !important;
+    background: #f8fafc !important;
+    padding: 0 16px !important;
+    display: flex !important;
+    align-items: center !important;
+    box-shadow: none !important;
+}
+
+.custom-select-override:hover .ant-select-selector,
+.custom-select-override.ant-select-focused .ant-select-selector {
+    border-color: #2563eb !important;
+    background: #ffffff !important;
+}
+
+/* Button Styles */
+.premium-btn {
+    height: 40px !important;
+    padding: 0 24px !important;
+    border-radius: 8px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.premium-btn-primary {
+    background-color: #2563eb !important;
+    border-color: #2563eb !important;
+    color: white !important;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25) !important;
+}
+
+.premium-btn-primary:hover {
+    background-color: #1d4ed8 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3) !important;
+}
+
+.premium-btn-outline {
+    background: white !important;
+    border: 1px solid #e2e8f0 !important;
+    color: #475569 !important;
+}
+
+.premium-btn-outline:hover {
+    border-color: #2563eb !important;
+    color: #2563eb !important;
+    background: #f8fafc !important;
+}
+
+/* Modal form styling */
+.premium-modal .ant-modal-content {
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+}
+
+.premium-modal .ant-modal-header {
+    padding: 24px 32px !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+}
+
+.premium-modal .ant-modal-title {
+    font-weight: 700 !important;
+    font-size: 18px !important;
+    color: #1e293b !important;
+}
+
+.premium-modal .ant-modal-body {
+    padding: 32px !important;
+    padding-top: 20px !important;
+}
+
+.premium-modal .ant-modal-footer {
+    padding: 16px 32px 24px !important;
+    border-top: none !important;
+}
+
+.premium-modal .ant-modal-close {
+    top: 24px !important;
+    right: 24px !important;
+}
+

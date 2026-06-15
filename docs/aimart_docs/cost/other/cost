@@ -1,0 +1,94 @@
+## 文生视频模型
+
+sora-2: $0.025 / generation·
+sora-2-vip: $0.08008 / generation·
+sora-2-preview: $0.08 / s
+
+sora-2-pro: $0.6 / generation·
+sora-2-pro-preview: $0.18/s for 720P and $0.3000/s for 1080P
+
+veo3.1-fast: $0.08 for 720p/1080p and 0.2400 for 4K·
+veo3.1-quality: $0.6 for 720p/1080p and 1.9200 for 4K
+
+wan2.6: ($0.05/s) for 720p and ($0.0840/s) for 1080p
+
+doubao-seedance-1-0-pro-fast: ($0.0088/s) for 480p and ($0.0200/s) for 720p and ($0.0416/s) for 1080p·
+doubao-seedance-1-0-pro-quality: ($0.0204/s) for 480p and ($0.0440/s) for 720p and ($0.1040/s) for 1080p
+
+doubao-seedance-1-5-pro: ($0.0204/s) for 480p and ($0.0440/s) for 720p and ($0.1080/s) for 1080p
+
+MiniMax-Hailuo-02: ($0.0104/s) for 512p and ($0.0400/s) for 768p and ($0.0800/s) for 1080p
+
+MiniMax-Hailuo-2.3: ($0.0488/s) for 768p and ($0.0720/s) for 1080p
+
+kling-v2-6: $0.0368/s for 720P, $0.0625/s for 1080P, $0.125/s for 1080P+Audio
+
+viduq3-pro: ($0.0560/s) for 540p and ($0.1200/s) for 720p and ($0.1280/s) for 1080p
+
+## 文生图
+
+doubao-seedream-5-0-lite: $0.028 for 2K/3K
+
+doubao-seedance-4-5: $0.028 for 2K/4K
+
+doubao-seedance-4-0: $0.0224 for 1K/2K/4K
+
+gemini-3-pro-image-preview: $0.05 for 1K/2K and $0.1000 for 4K
+
+gemini-2.5-flash-image-preview: $0.0125 / generation
+
+gemini-3.1-flash-image-preview: $0.0100 for 0.5K, $0.01 for 1K, $0.0200 for 2K, $0.0300 for 4K
+
+gpt-4o-image: $0.006 / generation
+
+flux-kontext-pro: $0.02 / generation·
+flux-kontext-max: $0.04 / generation
+
+flux-2-pro: $0.025 for 1K and $0.0350 for 2K·
+flux-2-flex: $0.07 for 1K and $0.1200 for 2K
+
+## 多模态
+
+### apimart
+
+gpt-5.4-apimart Input: $0.2000 / 1M tokens · Output: $1.2000 / 1M tokens
+
+gemini-3.1-pro-preview-thinking-apimart Input: $0.4000 / 1M tokens · Output: $2.4000 / 1M tokens
+
+claude-sonnet-4-5-20250929-apimart Input: $0.6400 / 1M tokens · Output: $3.2000 / 1M tokens
+
+claude-opus-4-6-apimart Input: $0.8800 / 1M tokens · Output: $4.4000 / 1M tokens
+
+gemini-3-pro-preview-thinking-apimart Input: $0.4000 / 1M tokens · Output: $2.4000 / 1M tokens
+
+claude-sonnet-4-6-apimart Input: $0.6400 / 1M tokens · Output: $3.2000 / 1M tokens
+
+claude-opus-4-6-thinking-apimart Input: $0.8800 / 1M tokens · Output: $4.4000 / 1M tokens
+
+gemini-3.1-pro-preview-apimart Input: $0.4000 / 1M tokens · Output: $2.4000 / 1M tokens
+
+claude-sonnet-4-6-thinking-apimart Input: $0.6400 / 1M tokens · Output: $3.2000 / 1M tokens
+
+claude-opus-4-5-20251101-thinking-apimart Input: $0.8800 / 1M tokens · Output: $4.4000 / 1M tokens
+
+claude-haiku-4-5-20251001-thinking-apimart Input: $0.2400 / 1M tokens · Output: $1.2000 / 1M tokens
+
+claude-haiku-4-5-20251001-apimart Input: $0.2400 / 1M tokens · Output: $1.2000 / 1M tokens
+
+gemini-3-flash-preview-thinking-apimart Input: $0.1280 / 1M tokens · Output: $0.7680 / 1M tokens
+
+gpt-5.2-apimart Input: $0.1400 / 1M tokens · Output: $1.1200 / 1M tokens
+
+gpt-5-apimart Input: $0.1400 / 1M tokens · Output: $1.1200 / 1M tokens
+
+gemini-3-pro-preview-apimart Input: $0.4000 / 1M tokens · Output: $2.4000 / 1M tokens
+
+claude-opus-4-5-20251101-apimart Input: $0.8800 / 1M tokens · Output: $4.4000 / 1M tokens
+
+gemini-3-flash-preview-apimart Input: $0.1280 / 1M tokens · Output: $0.7680 / 1M tokens
+
+deepseek-r1-0528 Input: $60.0000 / 1M tokens · Output: $60.0000 / 1M tokens
+
+deepseek-v3.2 Input: $0.4480 / 1M tokens · Output: $1.3440 / 1M tokens
+
+deepseek-v3-0324 Input: $1.6000 / 1M tokens · Output: $6.4000 / 1M tokens

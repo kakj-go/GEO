@@ -1,0 +1,44 @@
+### 1.1 带分页参数的查询
+GET {{host}}/v1/user/company/1?page=1&page_size=5
+Content-Type: application/json
+Authorization: {{token}}
+
+### 2. 创建新用户
+POST {{host}}/v1/user
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "avatar": "",
+  "phone": "123456",
+  "username": "admins",
+  "nickname": "admins",
+  "company_id": 1,
+  "passwd": "a123456"
+}
+
+### 用户详情
+GET {{host}}/v1/user/user_info
+Content-Type: application/json
+Authorization: {{token}}
+
+### 3. 更新用户信息
+### 注意：需要先获取一个有效的用户ID，替换下面的 {id}
+@userId = 2
+PUT {{host}}/v1/user/{{userId}}
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "nickname": "张三-更新",
+  "avatar": "http://baidu-1.com"
+}
+
+
+### 4. 删除用户（软删除）
+### 注意：使用实际存在的用户ID进行测试
+@userToDelete = 2
+
+DELETE {{host}}/v1/user/{{userToDelete}}
+Content-Type: application/json
+Authorization: {{token}}

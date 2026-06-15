@@ -1,0 +1,50 @@
+### 创建公司
+POST {{host}}/v1/company
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "name": "第一家公司",
+  "avatar": ""
+}
+
+### 获取公司信息
+GET {{host}}/v1/company/1
+Authorization: {{token}}
+
+### 变更公司的管理员id
+PUT {{host}}/v1/company/1/manager
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "user_manager_id": 2
+}
+
+### 增加公司金额
+POST {{host}}/v1/company/1/balance/add
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "balance": 200
+}
+
+
+### 减少公司金额
+POST {{host}}/v1/company/1/balance/delete
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "balance": 200
+}
+
+### 更新公司信息
+PUT {{host}}/v1/company/1
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "avatar": "123"
+}

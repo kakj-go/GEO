@@ -1,0 +1,600 @@
+/* 基本布局样式 */
+.aieo-generate {
+    padding: 20px;
+}
+
+.page-content-card {
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #f1f5f9;
+    padding: 24px;
+}
+
+/* Filter area styling to match premium form */
+.filter-row {
+    margin-bottom: 24px;
+    padding: 24px;
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 1px solid #f1f5f9;
+}
+
+.filter-row .ant-form-item-label > label {
+    font-weight: 600 !important;
+    color: #334155 !important;
+    font-size: 13px !important;
+}
+
+/* Custom Input inside form to match styling */
+.custom-input {
+    height: 40px !important;
+    border-radius: 8px !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: none !important;
+    background: #ffffff !important;
+    color: #334155 !important;
+    font-size: 14px !important;
+    padding: 0 16px !important;
+}
+
+.custom-input:focus, .custom-input:hover {
+    border-color: #2563eb !important;
+    background: #ffffff !important;
+}
+
+/* Button Styles */
+.premium-btn {
+    height: 40px !important;
+    padding: 0 24px !important;
+    border-radius: 8px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.premium-btn-primary {
+    background-color: #2563eb !important;
+    border-color: #2563eb !important;
+    color: white !important;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25) !important;
+}
+
+.premium-btn-primary:hover {
+    background-color: #1d4ed8 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3) !important;
+}
+
+.premium-btn-outline {
+    background: white !important;
+    border: 1px solid #e2e8f0 !important;
+    color: #475569 !important;
+}
+
+.premium-btn-outline:hover {
+    border-color: #2563eb !important;
+    color: #2563eb !important;
+    background: #f8fafc !important;
+}
+
+.premium-btn-text-danger {
+    color: #ef4444 !important;
+    font-weight: 600 !important;
+    transition: all 0.2s ease !important;
+    padding: 0 8px !important;
+}
+
+.premium-btn-text-danger:hover {
+    color: #dc2626 !important;
+    background: #fef2f2 !important;
+    border-radius: 6px !important;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.section-title {
+    margin: 0;
+    color: #1f2937;
+}
+
+/* 步骤内容样式 */
+.step-content {
+    /*max-height: 500px;*/
+    overflow-y: auto;
+}
+
+.questions-container {
+    margin-top: 10px;
+}
+
+/* 模态框样式 */
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 16px 0;
+    margin-top: 20px;
+    border-top: 1px solid #f0f0f0;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .header-right {
+        width: 100%;
+    }
+}
+
+
+.corpus-management {
+    padding: 24px 8px;
+    /* Buffer for AntD row negative margins */
+    overflow-x: hidden;
+}
+
+.title-list {
+    border: 1px solid #f0f0f0;
+    border-radius: 16px;
+    max-height: 500px;
+    overflow-y: auto;
+    padding: 12px;
+    background-color: #fafafa;
+}
+
+.title-item {
+    padding: 12px 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    margin-bottom: 4px;
+    transition: all 0.2s ease;
+    color: #4b5563;
+    font-weight: 500;
+}
+
+.title-item:last-child {
+    margin-bottom: 0;
+}
+
+.title-item:hover {
+    background-color: #f3f4f6;
+    color: #1f2937;
+}
+
+.title-item.active {
+    background-color: #eff6ff;
+    color: #2563eb;
+    font-weight: 600;
+}
+
+.content-editor {
+    border: 1px solid #f0f0f0;
+    border-radius: 16px;
+    padding: 16px;
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+}
+
+/* 柔和科技风 Markdown 编辑器深度覆盖 */
+.content-editor .w-md-editor {
+    border: 1px solid #f9fafb !important;
+    border-radius: 12px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02) !important;
+    background-color: #fafafa !important;
+}
+
+.content-editor .w-md-editor-toolbar {
+    background-color: #ffffff !important;
+    border-bottom: 1px solid #f0f0f0 !important;
+    padding: 10px 16px !important;
+    border-radius: 12px 12px 0 0 !important;
+}
+
+.content-editor .w-md-editor-toolbar li>button {
+    color: #6b7280 !important;
+    transition: all 0.2s ease !important;
+}
+
+.content-editor .w-md-editor-toolbar li.active>button,
+.content-editor .w-md-editor-toolbar li>button:hover {
+    color: #2563eb !important;
+    background-color: #eff6ff !important;
+    border-radius: 6px !important;
+}
+
+.content-editor .w-md-editor-content {
+    background-color: #fafafa !important;
+}
+
+.content-editor .wmde-markdown {
+    background-color: transparent !important;
+    color: #374151 !important;
+}
+
+.content-editor .w-md-editor-text-pre>code,
+.content-editor .w-md-editor-text-input {
+    color: #1f2937 !important;
+    font-size: 15px !important;
+    line-height: 1.7 !important;
+}
+
+.save-button-container {
+    margin-top: 24px;
+    text-align: right;
+}
+
+.save-button-container .ant-btn {
+    border-radius: 9999px;
+    padding: 0 32px;
+    height: 40px;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+record-status {
+    padding: 20px;
+}
+
+.platform-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.platform-card .ant-card-meta-description {
+    margin-top: 10px;
+}
+
+.platform-card .ant-card-meta-description p {
+    margin: 5px 0;
+}
+
+/* 选择图片弹窗样式优化 */
+.image-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: flex-start;
+}
+
+.image-card {
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.2s ease;
+    border: 1px solid #f0f0f0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+}
+
+.image-card:hover {
+    border-color: #2563eb;
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.12);
+    transform: translateY(-2px);
+}
+
+.image-card .ant-card-body {
+    padding: 12px !important;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.image-card .image-cover {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 8px;
+    background-color: #fafafa;
+}
+
+.image-card .ant-btn {
+    border-radius: 6px;
+    font-size: 12px;
+    height: 24px;
+    padding: 0 8px;
+    box-shadow: none;
+}
+
+/* 选择知识库弹窗样式优化 */
+.knowledge-base-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.knowledge-base-card {
+    border-radius: 12px;
+    border: 1px solid #f0f0f0;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+    margin-bottom: 0 !important;
+}
+
+.knowledge-base-card:hover {
+    border-color: #2563eb;
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.12);
+    transform: translateY(-2px);
+}
+
+.knowledge-base-card .ant-card-body {
+    padding: 16px 24px !important;
+}
+
+.knowledge-base-card .ant-btn {
+    border-radius: 6px;
+    box-shadow: none;
+}
+
+/* 详情页面卡片式排版 */
+.detail-section-card {
+    background-color: #ffffff;
+    border: 1px solid #f0f0f0;
+    border-radius: 16px;
+    padding: 24px 32px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+}
+
+.detail-section-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1f2937;
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f9fafb;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.info-label {
+    font-size: 13px;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.info-value {
+    font-size: 15px;
+    color: #111827;
+    font-weight: 600;
+}
+
+/* 覆盖之前可能存在的深色边框 */
+.task-detail .ant-table-wrapper .ant-table {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #f0f0f0;
+}
+
+.task-detail .ant-table-thead>tr>th {
+    background: #fafafa;
+    color: #4b5563;
+    font-weight: 600;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.detail-image {
+    border-radius: 8px;
+    border: 1px solid #f0f0f0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s;
+}
+
+.detail-image:hover {
+    transform: scale(1.02);
+}
+
+.image-item {
+    display: inline-block;
+    margin-right: 16px;
+    margin-bottom: 16px;
+}
+
+.knowledge-item {
+    display: inline-block;
+    background: #fafafa;
+    border: 1px solid #e5e7eb;
+    padding: 8px 16px;
+    border-radius: 8px;
+    margin-right: 12px;
+    margin-bottom: 12px;
+    color: #4b5563;
+    font-weight: 500;
+}
+
+/* Modal form styling */
+.premium-modal .ant-modal-content {
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+}
+
+.premium-modal .ant-modal-header {
+    padding: 24px 32px !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+}
+
+.premium-modal .ant-modal-title {
+    font-weight: 700 !important;
+    font-size: 18px !important;
+    color: #1e293b !important;
+}
+
+.premium-modal .ant-modal-body {
+    padding: 32px !important;
+    padding-top: 20px !important;
+}
+
+.premium-modal .ant-modal-footer {
+    padding: 16px 32px 24px !important;
+    border-top: none !important;
+}
+
+.premium-modal .ant-modal-close {
+    top: 24px !important;
+    right: 24px !important;
+}
+
+/* Select Styling */
+.custom-select-override {
+    height: 40px !important;
+}
+
+.custom-select-override .ant-select-selector {
+    height: 40px !important;
+    border-radius: 8px !important;
+    border: 1px solid #e2e8f0 !important;
+    background: #ffffff !important;
+    padding: 0 16px !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.custom-select-override .ant-select-selection-item {
+    color: #334155 !important;
+    font-weight: 500 !important;
+}
+
+.custom-select-dropdown {
+    border-radius: 12px !important;
+    padding: 8px !important;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+    border: 1px solid #f1f5f9 !important;
+}
+
+/* Premium Selected Asset List styling */
+.premium-selected-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.selected-item-card {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #f1f5f9;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    background: #ffffff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.image-item-card {
+    width: 68px;
+    height: 68px;
+}
+
+.image-item-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.remove-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    opacity: 0;
+    transition: opacity 0.2s;
+    cursor: pointer;
+}
+
+.image-item-card:hover .remove-overlay {
+    opacity: 1;
+}
+
+.add-item-trigger {
+    width: 68px;
+    height: 68px;
+    border: 1.5px dashed #cbd5e1;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #94a3b8;
+    transition: all 0.3s ease;
+    background: #f8fafc;
+}
+
+.add-item-trigger:hover {
+    border-color: #2563eb;
+    color: #2563eb;
+    background: #eff6ff;
+    transform: translateY(-1px);
+}
+
+.block-list {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.kb-item-card {
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    background: #f8fafc;
+    border: 1px solid #f1f5f9;
+    min-width: 240px;
+    justify-content: space-between;
+}
+
+.kb-icon {
+    margin-right: 12px;
+    font-size: 16px;
+}
+
+.kb-name {
+    flex: 1;
+    font-size: 14px;
+    font-weight: 600;
+    color: #334155;
+    margin-right: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.remove-icon {
+    font-size: 16px;
+    color: #94a3b8;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.remove-icon:hover {
+    color: #ef4444;
+    transform: scale(1.1);
+}
+
+.add-kb-btn {
+    height: 44px !important;
+    border-radius: 12px !important;
+    padding: 0 24px !important;
+    font-weight: 600 !important;
+    border-style: dashed !important;
+}
+
+.ant-table-tbody :where(.css-dev-only-do-not-override-10dy31s).ant-space-gap-col-middle {
+    column-gap: 0;
+}

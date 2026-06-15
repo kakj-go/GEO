@@ -1,0 +1,65 @@
+### 生成用户问题
+POST {{host}}/v1/aieo_generate/generate_user_questions
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "keyword": "青岛寿司",
+  "target_word": " "
+}
+
+### 创建AIEO生成任务
+POST {{host}}/v1/aieo_generate
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "name": "阿旭寿司店推广",
+  "keyword": "青岛寿司店",
+  "target_word": "阿旭寿司",
+  "image_library_id_list": [2, 3],
+  "material_library_id_list": [1],
+  "create_num": 3,
+  "type": "Image",
+  "user_questions": [
+    "青岛哪里的寿司店比较正宗？",
+    "青岛有哪些口碑好的寿司店推荐？",
+    "青岛寿司店的人均消费大概是多少？",
+    "青岛有没有性价比高的寿司外卖？",
+    "青岛有没有日式寿司自助餐厅？",
+    "青岛本地人常去的寿司店有哪些？",
+    "青岛寿司店的食材新鲜度怎么样？",
+    "青岛有没有做创意寿司的特色店？",
+    "青岛寿司店可以定制寿司拼盘吗？",
+    "青岛有没有适合约会的寿司餐厅？"
+  ]
+}
+
+### 获取AIEO生成任务详情
+GET {{host}}/v1/aieo_generate/2
+Content-Type: application/json
+Authorization: {{token}}
+
+### 获取AIEO生成任务列表
+GET {{host}}/v1/aieo_generate
+Content-Type: application/json
+Authorization: {{token}}
+
+### 取消任务
+PUT {{host}}/v1/aieo_generate/2/status
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "status": "Cancel"
+}
+
+### 删除任务
+DELETE {{host}}/v1/aieo_generate/2
+Content-Type: application/json
+Authorization: {{token}}
+
+### 获取发送任务
+POST {{host}}/v1/aieo_generate/get_send_job
+Content-Type: application/json
+Authorization: {{token}}

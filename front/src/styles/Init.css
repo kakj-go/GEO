@@ -1,0 +1,120 @@
+.init-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #f8fafc;
+    position: relative;
+    overflow: hidden;
+}
+
+.init-card {
+    background: #ffffff;
+    width: 100%;
+    max-width: 520px;
+    padding: 48px 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+    z-index: 10;
+    position: relative;
+    border: 1px solid #f1f5f9;
+}
+
+.init-header {
+    text-align: center;
+    margin-bottom: 36px;
+}
+
+.init-icon-box {
+    width: 64px;
+    height: 64px;
+    background: #eff6ff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+}
+
+.init-icon-box .rocket-icon {
+    font-size: 28px;
+    color: #2563eb;
+}
+
+.init-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 8px;
+}
+
+.init-subtitle {
+    font-size: 14px;
+    color: #64748b;
+}
+
+/* Form Styling */
+.init-form-body .ant-form-item-label > label {
+    font-weight: 600;
+    color: #334155;
+    font-size: 14px;
+}
+
+.custom-init-input {
+    background: #f9fafb !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    padding: 10px 14px !important;
+    transition: all 0.2s;
+}
+
+.custom-init-input:hover {
+    border-color: #cbd5e1 !important;
+}
+
+.custom-init-input.ant-input-affix-wrapper-focused,
+.custom-init-input.ant-input-focused {
+    background: #ffffff !important;
+    border-color: #2563eb !important;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1) !important;
+}
+
+.input-prefix-icon {
+    color: #94a3b8;
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+.init-submit-btn {
+    height: 52px !important;
+    background: #2563eb !important;
+    border-color: #2563eb !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    font-size: 16px !important;
+    margin-top: 12px;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2) !important;
+}
+
+.init-submit-btn:hover {
+    background: #1d4ed8 !important;
+    border-color: #1d4ed8 !important;
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3) !important;
+    transform: translateY(-1px);
+}
+
+.init-bottom-gradient {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #3b82f6, #2563eb);
+}
+
+@media (max-width: 580px) {
+    .init-card {
+        padding: 32px 24px;
+        max-width: 90%;
+    }
+}

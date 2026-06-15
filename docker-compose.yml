@@ -1,0 +1,97 @@
+version: "3.8"
+
+services:
+  # ============================================
+  # MySQL 数据库服务
+  # ============================================
+  mysql:
+    image: mysql:8.0
+    container_name: superlink-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpassword}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-llm_reference_matrix}
+      MYSQL_CHARSET: utf8mb4
+      MYSQL_COLLATION: utf8mb4_unicode_ci
+      TZ: Asia/Shanghai
+    ports:
+      - "${MYSQL_PORT:-3306}:3306"
+    volumes:
+      # 数据库数据持久化
+      - mysql_data:/var/lib/mysql
+      # 初始化 SQL 脚本 (首次启动时自动执行)
+      - ./migrations/20251031082502_init.up.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --default-authentication-plugin=mysql_native_password
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-rootpassword}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    networks:
+      - superlink-network
+
+  # ============================================
+  # 后端服务 (SuperLink API)
+  # ============================================
+  superlink:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: kakj/superlink:v1.0
+    container_name: superlink-api
+    restart: always
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      # App
+      APP_NAME: llm_reference_matrix
+      APP_VERSION: 1.0.0
+      APP_ASSETS_LIBRARY_PATH: /app/data
+      APP_HOST: ${APP_HOST:-http://localhost:8080}
+      # HTTP
+      HTTP_PORT: 8080
+      HTTP_USE_PREFORK_MODE: "false"
+      # Logger
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      # MySQL - 容器内连接使用服务名 mysql 作为 host
+      MYSQL_POOL_MAX: ${MYSQL_POOL_MAX:-10}
+      MYSQL_URL: "root:${MYSQL_ROOT_PASSWORD:-rootpassword}@tcp(mysql:3306)/${MYSQL_DATABASE:-llm_reference_matrix}?charset=utf8mb4&parseTime=True&loc=Local"
+      # Metrics
+      METRICS_ENABLED: ${METRICS_ENABLED:-true}
+      # Swagger
+      SWAGGER_ENABLED: ${SWAGGER_ENABLED:-false}
+      # JWT
+      JWT_SECRET: ${JWT_SECRET:-123456}
+      JWT_WHITELISTROP: ${JWT_WHITELISTROP:-}
+      # Debug
+      DEBUG: ${DEBUG:-false}
+    ports:
+      - "${HTTP_PORT:-8080}:8080"
+    volumes:
+      # 素材库文件持久化存储 (图片、视频等资产文件)
+      - superlink_assets:/app/data
+    networks:
+      - superlink-network
+
+# ============================================
+# 数据卷定义
+# ============================================
+volumes:
+  # MySQL 数据持久化
+  mysql_data:
+    driver: local
+  # 素材库资产文件持久化
+  superlink_assets:
+    driver: local
+
+# ============================================
+# 网络定义
+# ============================================
+networks:
+  superlink-network:
+    driver: bridge

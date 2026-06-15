@@ -1,0 +1,605 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://docs.apimart.ai/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Wan2.6 视频生成
+
+>  - 阿里云万相视频生成模型
+- 支持文生视频 (Text-to-Video) 和图生视频 (Image-to-Video)
+- 支持 720p/1080p 分辨率，5/10/15 秒时长
+- 支持自动扩展提示词和音频生成
+
+<RequestExample>
+  ```bash cURL theme={null}
+  curl --request POST \
+    --url https://api.apimart.ai/v1/videos/generations \
+    --header 'Authorization: Bearer <token>' \
+    --header 'Content-Type: application/json' \
+    --data '{
+      "model": "wan2.6",
+      "prompt": "一只可爱的猫咪在草地上奔跑",
+      "aspect_ratio": "16:9",
+      "resolution": "720p",
+      "duration": 5
+    }'
+  ```
+
+  ```python Python theme={null}
+  import requests
+
+  url = "https://api.apimart.ai/v1/videos/generations"
+
+  payload = {
+      "model": "wan2.6",
+      "prompt": "一只可爱的猫咪在草地上奔跑",
+      "aspect_ratio": "16:9",
+      "resolution": "720p",
+      "duration": 5
+  }
+
+  headers = {
+      "Authorization": "Bearer <token>",
+      "Content-Type": "application/json"
+  }
+
+  response = requests.post(url, json=payload, headers=headers)
+
+  print(response.json())
+  ```
+
+  ```javascript JavaScript theme={null}
+  const url = "https://api.apimart.ai/v1/videos/generations";
+
+  const payload = {
+    model: "wan2.6",
+    prompt: "一只可爱的猫咪在草地上奔跑",
+    aspect_ratio: "16:9",
+    resolution: "720p",
+    duration: 5
+  };
+
+  const headers = {
+    "Authorization": "Bearer <token>",
+    "Content-Type": "application/json"
+  };
+
+  fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify(payload)
+  })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
+  ```
+
+  ```go Go theme={null}
+  package main
+
+  import (
+      "bytes"
+      "encoding/json"
+      "fmt"
+      "io/ioutil"
+      "net/http"
+  )
+
+  func main() {
+      url := "https://api.apimart.ai/v1/videos/generations"
+
+      payload := map[string]interface{}{
+          "model":        "wan2.6",
+          "prompt":       "一只可爱的猫咪在草地上奔跑",
+          "aspect_ratio": "16:9",
+          "resolution":   "720p",
+          "duration":     5,
+      }
+
+      jsonData, _ := json.Marshal(payload)
+
+      req, _ := http.NewRequest("POST", url, bytes.NewBuffer(jsonData))
+      req.Header.Set("Authorization", "Bearer <token>")
+      req.Header.Set("Content-Type", "application/json")
+
+      client := &http.Client{}
+      resp, err := client.Do(req)
+      if err != nil {
+          panic(err)
+      }
+      defer resp.Body.Close()
+
+      body, _ := ioutil.ReadAll(resp.Body)
+      fmt.Println(string(body))
+  }
+  ```
+
+  ```java Java theme={null}
+  import java.net.http.HttpClient;
+  import java.net.http.HttpRequest;
+  import java.net.http.HttpResponse;
+  import java.net.URI;
+
+  public class Main {
+      public static void main(String[] args) throws Exception {
+          String url = "https://api.apimart.ai/v1/videos/generations";
+
+          String payload = """
+          {
+            "model": "wan2.6",
+            "prompt": "一只可爱的猫咪在草地上奔跑",
+            "aspect_ratio": "16:9",
+            "resolution": "720p",
+            "duration": 5
+          }
+          """;
+
+          HttpClient client = HttpClient.newHttpClient();
+          HttpRequest request = HttpRequest.newBuilder()
+              .uri(URI.create(url))
+              .header("Authorization", "Bearer <token>")
+              .header("Content-Type", "application/json")
+              .POST(HttpRequest.BodyPublishers.ofString(payload))
+              .build();
+
+          HttpResponse<String> response = client.send(request,
+              HttpResponse.BodyHandlers.ofString());
+
+          System.out.println(response.body());
+      }
+  }
+  ```
+
+  ```php PHP theme={null}
+  <?php
+
+  $url = "https://api.apimart.ai/v1/videos/generations";
+
+  $payload = [
+      "model" => "wan2.6",
+      "prompt" => "一只可爱的猫咪在草地上奔跑",
+      "aspect_ratio" => "16:9",
+      "resolution" => "720p",
+      "duration" => 5
+  ];
+
+  $ch = curl_init($url);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($ch, CURLOPT_POST, true);
+  curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+  curl_setopt($ch, CURLOPT_HTTPHEADER, [
+      "Authorization: Bearer <token>",
+      "Content-Type: application/json"
+  ]);
+
+  $response = curl_exec($ch);
+  curl_close($ch);
+
+  echo $response;
+  ?>
+  ```
+
+  ```ruby Ruby theme={null}
+  require 'net/http'
+  require 'json'
+  require 'uri'
+
+  url = URI("https://api.apimart.ai/v1/videos/generations")
+
+  payload = {
+    model: "wan2.6",
+    prompt: "一只可爱的猫咪在草地上奔跑",
+    aspect_ratio: "16:9",
+    resolution: "720p",
+    duration: 5
+  }
+
+  http = Net::HTTP.new(url.host, url.port)
+  http.use_ssl = true
+
+  request = Net::HTTP::Post.new(url)
+  request["Authorization"] = "Bearer <token>"
+  request["Content-Type"] = "application/json"
+  request.body = payload.to_json
+
+  response = http.request(request)
+  puts response.body
+  ```
+
+  ```swift Swift theme={null}
+  import Foundation
+
+  let url = URL(string: "https://api.apimart.ai/v1/videos/generations")!
+
+  let payload: [String: Any] = [
+      "model": "wan2.6",
+      "prompt": "一只可爱的猫咪在草地上奔跑",
+      "aspect_ratio": "16:9",
+      "resolution": "720p",
+      "duration": 5
+  ]
+
+  var request = URLRequest(url: url)
+  request.httpMethod = "POST"
+  request.setValue("Bearer <token>", forHTTPHeaderField: "Authorization")
+  request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+  request.httpBody = try? JSONSerialization.data(withJSONObject: payload)
+
+  let task = URLSession.shared.dataTask(with: request) { data, response, error in
+      if let error = error {
+          print("Error: \(error)")
+          return
+      }
+
+      if let data = data, let responseString = String(data: data, encoding: .utf8) {
+          print(responseString)
+      }
+  }
+
+  task.resume()
+  ```
+
+  ```csharp C# theme={null}
+  using System;
+  using System.Net.Http;
+  using System.Text;
+  using System.Threading.Tasks;
+
+  class Program
+  {
+      static async Task Main(string[] args)
+      {
+          var url = "https://api.apimart.ai/v1/videos/generations";
+
+          var payload = @"{
+              ""model"": ""wan2.6"",
+              ""prompt"": ""一只可爱的猫咪在草地上奔跑"",
+              ""aspect_ratio"": ""16:9"",
+              ""resolution"": ""720p"",
+              ""duration"": 5
+          }";
+
+          using var client = new HttpClient();
+          client.DefaultRequestHeaders.Add("Authorization", "Bearer <token>");
+
+          var content = new StringContent(payload, Encoding.UTF8, "application/json");
+          var response = await client.PostAsync(url, content);
+          var result = await response.Content.ReadAsStringAsync();
+
+          Console.WriteLine(result);
+      }
+  }
+  ```
+</RequestExample>
+
+<ResponseExample>
+  ```json 200 theme={null}
+  {
+    "code": 200,
+    "data": [
+      {
+        "status": "submitted",
+        "task_id": "task_01J9HA7JPQ9A0Z6JZ3V8M9W6PZ"
+      }
+    ]
+  }
+  ```
+
+  ```json 400 theme={null}
+  {
+    "error": {
+      "code": 400,
+      "message": "请求参数无效",
+      "type": "invalid_request_error"
+    }
+  }
+  ```
+
+  ```json 401 theme={null}
+  {
+    "error": {
+      "code": 401,
+      "message": "身份验证失败，请检查您的API密钥",
+      "type": "authentication_error"
+    }
+  }
+  ```
+
+  ```json 402 theme={null}
+  {
+    "error": {
+      "code": 402,
+      "message": "账户余额不足，请充值后再试",
+      "type": "payment_required"
+    }
+  }
+  ```
+
+  ```json 429 theme={null}
+  {
+    "error": {
+      "code": 429,
+      "message": "请求过于频繁，请稍后再试",
+      "type": "rate_limit_error"
+    }
+  }
+  ```
+
+  ```json 500 theme={null}
+  {
+    "error": {
+      "code": 500,
+      "message": "服务器内部错误，请稍后重试",
+      "type": "server_error"
+    }
+  }
+  ```
+</ResponseExample>
+
+## 认证
+
+<ParamField header="Authorization" type="string" required>
+  所有接口均需要使用 Bearer Token 进行认证
+
+  获取 API Key：
+
+  访问 [API Key 管理页面](https://apimart.ai/console/token) 获取您的 API Key
+
+  使用时在请求头中添加：
+
+  ```
+  Authorization: Bearer YOUR_API_KEY
+  ```
+</ParamField>
+
+## 请求参数
+
+<ParamField body="model" type="string" required>
+  视频生成模型名称，固定为 `wan2.6`
+</ParamField>
+
+<ParamField body="prompt" type="string" required>
+  视频内容描述
+
+  文生视频模式下必填，建议详细描述场景、动作、风格等
+
+  示例：`"一只可爱的猫咪在阳光下伸懒腰"`
+</ParamField>
+
+<ParamField body="image_urls" type="array<url>">
+  参考图片 URL 数组（仅支持 1 张图片）
+
+  图生视频模式下必填，支持公网可访问的图片 URL
+
+  示例：`["https://example.com/image.jpg"]`
+
+  <Note>
+    系统会根据请求中是否包含 `image_urls` 自动选择文生视频或图生视频模式
+  </Note>
+</ParamField>
+
+<ParamField body="negative_prompt" type="string">
+  负面提示词，描述不希望出现的内容
+
+  示例：`"模糊, 低质量, 变形"`
+</ParamField>
+
+<ParamField body="aspect_ratio" type="string" default="16:9">
+  视频宽高比
+
+  可选值：
+
+  * `16:9` - 横屏（默认）
+  * `9:16` - 竖屏
+  * `1:1` - 方形
+  * `4:3` - 横屏
+  * `3:4` - 竖屏
+
+  默认值：`16:9`
+
+  <Warning>
+    图生视频模式不支持此参数
+  </Warning>
+</ParamField>
+
+<ParamField body="resolution" type="string" default="720p">
+  视频分辨率
+
+  可选值：
+
+  * `720p` - 标清（默认）
+  * `1080p` - 高清
+
+  默认值：`720p`
+
+  <Warning>
+    不支持 480p 分辨率
+  </Warning>
+
+  <Note>
+    按秒计费，不同分辨率价格不同，具体价格参考模型市场
+  </Note>
+</ParamField>
+
+<ParamField body="duration" type="integer" default="5">
+  视频时长（秒）
+
+  仅支持：`5`、`10`、`15` 秒
+
+  默认值：`5`
+</ParamField>
+
+<ParamField body="seed" type="integer">
+  随机种子，用于复现结果
+
+  示例：`12345`
+</ParamField>
+
+<ParamField body="prompt_extend" type="boolean">
+  是否自动扩展提示词
+
+  启用后系统会自动优化和丰富您的提示词
+</ParamField>
+
+<ParamField body="audio" type="boolean">
+  是否自动添加音频
+
+  启用后系统会为视频自动生成匹配的音频
+</ParamField>
+
+<ParamField body="audio_url" type="string">
+  指定音频 URL
+
+  优先级高于 `audio` 参数
+
+  <Warning>
+    音频时长不能超过视频时长。如果音频时长小于视频时长，视频前半部分有声音，后半部分将无声音。
+  </Warning>
+</ParamField>
+
+<ParamField body="shot_type" type="string">
+  镜头类型
+
+  可选值：
+
+  * `single` - 单镜头
+  * `multi` - 多镜头
+</ParamField>
+
+<ParamField body="watermark" type="boolean">
+  是否添加水印
+</ParamField>
+
+<ParamField body="template" type="string">
+  特效模板名称，用于图生视频特效模式
+
+  <Note>
+    使用特效模式时：
+
+    * 仅需一张图像（通过 `image_urls` 传入）
+    * 无需提示词（模型会忽略 `prompt` 字段）
+  </Note>
+
+  **通用特效：**
+
+  * `squish` - 解压捏捏
+  * `rotation` - 转圈圈
+  * `poke` - 戳戳乐
+  * `inflate` - 气球膨胀
+  * `dissolve` - 分子扩散
+  * `melt` - 热浪融化
+  * `icecream` - 冰淇淋星球
+  * `flying` - 魔法悬浮
+
+  **单人特效：**
+
+  * `carousel` - 时光木马
+  * `singleheart` - 爱你哟
+  * `dance1` - 摇摆时刻
+  * `dance2` - 头号甩舞
+
+  更多特效请参考[阿里云万相模板文档](https://help.aliyun.com/zh/model-studio/wanx-video-effects)
+</ParamField>
+
+## 分辨率与宽高比组合
+
+| 宽高比    | 说明     | 720p 尺寸  | 1080p 尺寸  |
+| ------ | ------ | -------- | --------- |
+| `16:9` | 横屏（默认） | 1280×720 | 1920×1080 |
+| `9:16` | 竖屏     | 720×1280 | 1080×1920 |
+| `1:1`  | 方形     | 960×960  | 1440×1440 |
+| `4:3`  | 横屏     | 1088×832 | 1632×1248 |
+| `3:4`  | 竖屏     | 832×1088 | 1248×1632 |
+
+## 响应
+
+<ResponseField name="code" type="integer">
+  响应状态码，成功时为 200
+</ResponseField>
+
+<ResponseField name="data" type="array">
+  返回数据数组
+
+  <Expandable title="数组元素">
+    <ResponseField name="status" type="string">
+      任务状态，初始提交时为 `submitted`
+    </ResponseField>
+
+    <ResponseField name="task_id" type="string">
+      任务唯一标识符，用于查询任务状态和结果
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+## 使用场景
+
+### 场景 1：文生视频（简单请求）
+
+```json  theme={null}
+{
+  "model": "wan2.6",
+  "prompt": "一只可爱的猫咪在阳光下伸懒腰"
+}
+```
+
+### 场景 2：文生视频（完整参数）
+
+```json  theme={null}
+{
+  "model": "wan2.6",
+  "prompt": "一只可爱的猫咪在草地上奔跑",
+  "negative_prompt": "模糊, 低质量, 变形",
+  "aspect_ratio": "16:9",
+  "resolution": "720p",
+  "duration": 5,
+  "seed": 12345,
+  "prompt_extend": true,
+  "audio": true,
+  "shot_type": "single",
+  "watermark": false
+}
+```
+
+### 场景 3：图生视频
+
+```json  theme={null}
+{
+  "model": "wan2.6",
+  "prompt": "小猫在地上跑步",
+  "image_urls": ["https://upload.apimart.ai/f/apimart-models-images/9998233432754770-c059992d-9b01-47d5-810d-ea0502ac9279-image_task_01KD7SSXDBCEWZ869D6PF249ZW_0.png"],
+  "resolution": "1080p",
+  "duration": 10
+}
+```
+
+### 场景 4：图生视频（Base64 图片）
+
+```json  theme={null}
+{
+  "model": "wan2.6",
+  "prompt": "让猫咪站起来走动",
+  "image_urls": ["data:image/png;base64,iVBORw0KGgo..."],
+  "duration": 5
+}
+```
+
+## 模式说明
+
+### 文生视频 (Text-to-Video)
+
+* 必须提供 `prompt` 参数
+* 不需要 `image_urls` 参数
+
+### 图生视频 (Image-to-Video)
+
+* 必须提供 `image_urls` 参数（仅支持 1 张图片）
+* `prompt` 参数可选，用于描述期望的动作
+
+<Note>
+  系统会根据请求中是否包含 `image_urls` 自动选择模式
+</Note>
+
+<Note>
+  **查询任务结果**
+
+  视频生成为异步任务，提交后会返回 `task_id`。使用 [获取任务状态](/cn/api-reference/tasks/status) 接口查询生成进度和结果。
+</Note>

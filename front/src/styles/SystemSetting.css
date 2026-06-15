@@ -1,0 +1,24 @@
+.media-library-container {
+    height: 100%;
+    padding: 0;
+}
+
+.ant-tabs {
+    height: 100%;
+}
+
+.ant-tabs-content {
+    height: calc(100% - 48px);
+    overflow-y: auto;
+}
+
+.ant-tabs-tabpane {
+    height: 100%;
+}
+.image_library_tab{
+    margin-left: 20px;
+}
+
+.ant-tabs-nav-wrap{
+    margin-left: 20px;
+}

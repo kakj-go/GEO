@@ -1,0 +1,75 @@
+### 创建模型
+POST {{host}}/v1/model
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "provider_name": "volcengine",
+  "model_name": "火山第二个模型",
+  "base_model": "Doubao-Seed-1.6-thinking",
+  "model_type": "llm",
+  "credential": {
+    "type": "api_key",
+    "api_key": "YOUR_API_KEY"
+  },
+  "region": "cn-beijing",
+  "endpoint_id": "ep-20251126202117-ng7bv",
+  "api_endpoint_host": "https://ark.cn-beijing.volces.com/api/v3",
+  "context_length": 16000,
+  "is_default": false
+}
+
+### 连接性测试
+POST {{host}}/v1/model/1/connect_test
+Authorization: {{token}}
+Content-Type: application/json
+
+### 模型列表
+GET {{host}}/v1/model
+Authorization: {{token}}
+
+### 模型详情
+GET {{host}}/v1/model/2
+Authorization: {{token}}
+
+### 更新模型
+PUT {{host}}/v1/model/2
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "model_name": "火山第一个模型1",
+  "base_model": "Doubao-Seed-1.6",
+  "credential": {
+    "type": "api_key",
+    "api_key": "YOUR_API_KEY"
+  },
+  "region": "cn-beijing",
+  "endpoint_id": "ep-20251126202117-ng7bv",
+  "api_endpoint_host": "https://ark.cn-beijing.volces.com/api/v3",
+  "context_length": 16000
+}
+
+### 更新模型状态
+PUT {{host}}/v1/model/2/status
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "status": "close"
+}
+
+### 设置为默认
+PUT {{host}}/v1/model/1/set_default
+Authorization: {{token}}
+Content-Type: application/json
+
+### 设置为默认
+PUT {{host}}/v1/model/3/set_default
+Authorization: {{token}}
+
+### 获取默认模型
+GET {{host}}/v1/model/get_default?model_type=llm
+Authorization: {{token}}
+
+

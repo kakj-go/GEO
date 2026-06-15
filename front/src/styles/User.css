@@ -1,0 +1,11 @@
+.user-container {
+    padding: 20px;
+}
+
+.user-container h2 {
+    margin-bottom: 20px;
+}
+
+.user-container .ant-table {
+    margin-bottom: 20px;
+}

@@ -1,0 +1,503 @@
+.plan-document-editor-workspace {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #ffffff;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    animation: slideInUp 0.3s ease-out;
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.editor-workspace-header {
+    height: 56px;
+    border-bottom: 1px solid #f3f4f6;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    background-color: #ffffff;
+    flex-shrink: 0;
+}
+
+.header-left {
+    flex: 1;
+}
+
+.save-status {
+    font-size: 13px;
+    color: #9ca3af;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.check-dot {
+    color: #10b981;
+    font-weight: bold;
+}
+
+.sync-dot {
+    color: #2563eb;
+    animation: pulse 1.5s infinite;
+}
+
+.header-center {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.history-btn {
+    padding: 6px;
+    color: #4b5563;
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.history-btn:hover {
+    background-color: #f9fafb;
+    color: #1f2937;
+}
+
+.history-btn:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+
+.header-right {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 16px;
+}
+
+.workspace-container {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+    background-color: #ffffff;
+}
+
+/* Sidebar */
+.outline-sidebar {
+    width: 240px;
+    border-right: 1px solid #f3f4f6;
+    padding: 24px 12px;
+    overflow-y: auto;
+    position: relative;
+    background-color: #ffffff;
+    transition: width 0.3s ease, padding 0.3s ease;
+}
+
+.outline-sidebar.collapsed {
+    width: 44px;
+    padding: 24px 0;
+    overflow: hidden;
+}
+
+.sidebar-collapse-btn {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    color: #9ca3af;
+    cursor: pointer;
+}
+
+.outline-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 20px;
+}
+
+.outline-item {
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #4b5563;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.outline-item:hover {
+    background-color: #f9fafb;
+    color: #1f2937;
+}
+
+.outline-item.active {
+    background-color: #eff6ff;
+    color: #2563eb;
+    font-weight: 500;
+}
+
+.outline-item.level-2 {
+    padding-left: 28px;
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.outline-item.level-3 {
+    padding-left: 44px;
+    font-size: 12px;
+    color: #9ca3af;
+}
+
+.outline-empty {
+    padding: 20px 12px;
+    color: #9ca3af;
+    font-size: 13px;
+    text-align: center;
+    font-style: italic;
+}
+
+/* Editor Main Area */
+.editor-main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    background-color: #ffffff;
+    overflow: hidden;
+}
+
+.editor-paper {
+    width: 100%;
+    max-width: 1000px;
+    padding: 60px 40px;
+    overflow-y: auto;
+    background-color: #ffffff;
+}
+
+/* Tiptap Custom Styles */
+.tiptap-editor-container:focus-within {
+    outline: none;
+}
+
+.ProseMirror {
+    outline: none;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #1f2937;
+}
+
+.ProseMirror h1 {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 1.5em;
+    color: #111827;
+}
+
+.ProseMirror h2 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-top: 2em;
+    margin-bottom: 1em;
+    color: #1f2937;
+    position: relative;
+}
+
+.ProseMirror h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 1.5em;
+    margin-bottom: 0.8em;
+    color: #374151;
+}
+
+.ProseMirror p {
+    margin-bottom: 1.2em;
+}
+
+.ProseMirror ul,
+.ProseMirror ol {
+    padding-left: 1.5em;
+    margin-bottom: 1.2em;
+}
+
+.ProseMirror li {
+    margin-bottom: 0.5em;
+}
+
+/* Bubble Menu Styles */
+.bubble-menu {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    padding: 4px;
+    z-index: 1001;
+}
+
+.bubble-menu-content {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.menu-group {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    position: relative;
+}
+
+.menu-btn,
+.bubble-menu button {
+    background: none;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    color: #4b5563;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.2s;
+}
+
+.bubble-menu button:hover {
+    background-color: #f3f4f6;
+    color: #111827;
+}
+
+.bubble-menu button.active {
+    color: #2563eb;
+    background-color: #eff6ff;
+}
+
+.divider {
+    width: 1px;
+    height: 18px;
+    background-color: #f3f4f6;
+    margin: 0 12px;
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: none;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #4b5563;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.action-btn:hover {
+    background-color: #f9fafb;
+    border-color: #d1d5db;
+    color: #1f2937;
+}
+
+.action-btn.active {
+    border-color: #2563eb;
+    color: #2563eb;
+    background-color: #eff6ff;
+}
+
+/* Download Dropdown in Editor Workspace */
+.download-container {
+    position: relative;
+    display: inline-block;
+}
+
+.download-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 160px;
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    padding: 6px;
+    z-index: 2000;
+    animation: fadeInScale 0.2s ease-out;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.download-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.download-item:hover {
+    background-color: #f9fafb;
+}
+
+.download-item span {
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+}
+
+.file-type-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.file-type-icon.word {
+    background-color: #2b579a;
+}
+
+.file-type-icon.markdown {
+    background-color: #000000;
+}
+
+.dropdown-btn {
+    min-width: 50px;
+}
+
+.heading-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    width: 180px;
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    z-index: 1002;
+}
+
+.heading-dropdown button {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 8px 12px;
+    font-weight: 500;
+}
+
+.heading-dropdown button .icon {
+    width: 24px;
+    font-size: 11px;
+    font-weight: 800;
+    color: #9ca3af;
+}
+
+.color-btn {
+    width: 28px;
+    height: 28px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    font-weight: 800 !important;
+}
+
+.icon-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px !important;
+}
+
+.icon-btn span {
+    font-weight: 500;
+}
+
+.icon-btn-circle {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid #e5e7eb;
+    background: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6b7280;
+}
+
+.icon-btn-circle:hover {
+    background-color: #f9fafb;
+    color: #1f2937;
+}
+
+.close-workspace-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #9ca3af;
+    transition: color 0.2s;
+}
+
+.close-workspace-btn:hover {
+    color: #ef4444;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Tiptap Placeholder */
+.ProseMirror p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    float: left;
+    color: #adb5bd;
+    pointer-events: none;
+    height: 0;
+}

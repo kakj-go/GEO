@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /d/workspace/go/llm_reference_matrix/front/release -type f -name *.exe -o -name *.zip -o -name *.dmg -o -name *.AppImage)",
+      "Bash(npx electron-builder:*)",
+      "Bash(npm list:*)",
+      "Bash(node -e \":*)",
+      "Bash(ls -lh D:/workspace/go/llm_reference_matrix/front/release/*.exe)",
+      "Bash(npm run:*)"
+    ]
+  }
+}

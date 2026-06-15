@@ -1,0 +1,46 @@
+### 上传图片
+POST {{host}}/v1/image_library
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+Authorization: {{token}}
+
+--WebAppBoundary
+Content-Disposition: form-data; name="image"; filename="test.jpg"
+Content-Type: image/jpeg
+
+< /Users/kakj/go/llm_reference_matrix/test/data/R-C.jpg
+--WebAppBoundary
+Content-Disposition: form-data; name="description"
+
+test图片描述
+--WebAppBoundary
+Content-Disposition: form-data; name="tags"
+
+["测试","示例"]
+--WebAppBoundary
+Content-Disposition: form-data; name="is_public"
+
+true
+--WebAppBoundary--
+
+### 获取图片详情
+GET {{host}}/v1/image_library/2
+Authorization: {{token}}
+
+### 更新图片信息
+PUT {{host}}/v1/image_library/2
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "description": "更新后的图片描述",
+  "tags": ["更新", "示例"],
+  "is_public": false
+}
+
+### 分页查询图片列表
+GET {{host}}/v1/image_library?page=1&page_size=10&description=&tag=&is_public=
+Authorization: {{token}}
+
+### 删除图片
+DELETE {{host}}/v1/image_library/2
+Authorization: {{token}}

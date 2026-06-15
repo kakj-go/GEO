@@ -1,0 +1,160 @@
+.aieo-tiptap-container {
+    display: flex;
+    flex-direction: column;
+    height: 600px;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+    overflow: hidden;
+}
+
+.aieo-fixed-toolbar {
+    height: 48px;
+    border-bottom: 1px solid #f3f4f6;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    background-color: #f8fafc;
+    flex-shrink: 0;
+}
+
+.editor-paper-inline {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px 32px;
+}
+
+.editor-paper-inline .tiptap-editor-container:focus-within {
+    outline: none;
+}
+
+.editor-paper-inline .ProseMirror {
+    outline: none;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #374151;
+    min-height: 400px;
+}
+
+.editor-paper-inline .ProseMirror h1 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 1em;
+    margin-top: 1.5em;
+    color: #111827;
+}
+
+.editor-paper-inline .ProseMirror h1:first-child {
+    margin-top: 0;
+}
+
+.editor-paper-inline .ProseMirror h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 1.5em;
+    margin-bottom: 0.8em;
+    color: #1f2937;
+}
+
+.editor-paper-inline .ProseMirror p {
+    margin-bottom: 1em;
+}
+
+.editor-paper-inline .ProseMirror ul,
+.editor-paper-inline .ProseMirror ol {
+    padding-left: 1.5em;
+    margin-bottom: 1em;
+}
+
+.editor-paper-inline .ProseMirror li {
+    margin-bottom: 0.5em;
+}
+
+.editor-paper-inline .ProseMirror img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 16px 0;
+}
+
+.aieo-fixed-toolbar .menu-group {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    position: relative;
+}
+
+.aieo-fixed-toolbar button {
+    background: none;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    color: #4b5563;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.2s;
+}
+
+.aieo-fixed-toolbar button:hover {
+    background-color: #e2e8f0;
+    color: #111827;
+}
+
+.aieo-fixed-toolbar button.active {
+    color: #2563eb;
+    background-color: #eff6ff;
+    font-weight: 600;
+}
+
+.aieo-fixed-toolbar .divider {
+    width: 1px;
+    height: 16px;
+    background-color: #e5e7eb;
+    margin: 0 12px;
+}
+
+.aieo-fixed-toolbar .heading-dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    width: 160px;
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+}
+
+.aieo-fixed-toolbar .heading-dropdown button {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 8px 12px;
+}
+
+.aieo-fixed-toolbar .heading-dropdown button .icon {
+    width: 24px;
+    font-size: 11px;
+    font-weight: 800;
+    color: #9ca3af;
+}
+
+.aieo-fixed-toolbar .heading-dropdown button.active .icon {
+    color: #2563eb;
+}
+
+/* Tiptap Placeholder */
+.editor-paper-inline .ProseMirror p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    float: left;
+    color: #adb5bd;
+    pointer-events: none;
+    height: 0;
+}

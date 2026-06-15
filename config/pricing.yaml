@@ -1,0 +1,34 @@
+models:
+  - id: gemini-2.5-pro
+    inputPrice: 700
+    outputPrice: 5600
+  - id: gemini-2.5-pro-thinking
+    inputPrice: 700
+    outputPrice: 5600
+  - id: gemini-2.5-flash
+    inputPrice: 147
+    outputPrice: 1400
+  - id: gemini-2.5-flash-lite
+    inputPrice: 49
+    outputPrice: 217
+  - id: gpt-5
+    inputPrice: 700
+    outputPrice: 5600
+  - id: gpt-5-mini
+    inputPrice: 133
+    outputPrice: 1120
+  - id: gpt-5-nano
+    inputPrice: 28
+    outputPrice: 224
+  - id: claude-haiku-4-5-20251001
+    inputPrice: 553
+    outputPrice: 2800
+  - id: claude-sonnet-4-5-20250929
+    inputPrice: 1687
+    outputPrice: 8400
+  - id: claude-sonnet-4-5-20250929-thinking
+    inputPrice: 1687
+    outputPrice: 8400
+  - id: deepseek-v3-0324
+    inputPrice: 1141
+    outputPrice: 4480

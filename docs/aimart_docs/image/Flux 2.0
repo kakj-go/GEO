@@ -1,0 +1,267 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://docs.apimart.ai/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Flux 2.0 图像生成
+
+>  - 异步处理模式，返回任务ID用于后续查询
+- 支持文本转图片、图生图等多种生成模式
+- 生成的图像链接，有效期为24小时，请尽快保存
+
+<RequestExample>
+  ```bash cURL theme={null}
+  curl --request POST \
+    --url https://api.apimart.ai/v1/images/generations \
+    --header 'Authorization: Bearer <token>' \
+    --header 'Content-Type: application/json' \
+    --data '{
+      "model": "flux-2-flex",
+      "prompt": "一只蓝色的猫在草地上",
+      "resolution": "1K",
+      "size": "16:9"
+    }'
+  ```
+
+  ```python Python theme={null}
+  import requests
+
+  url = "https://api.apimart.ai/v1/images/generations"
+
+  payload = {
+      "model": "flux-2-flex",
+      "prompt": "一只蓝色的猫在草地上",
+      "resolution": "1K",
+      "size": "16:9"
+  }
+
+  headers = {
+      "Authorization": "Bearer <token>",
+      "Content-Type": "application/json"
+  }
+
+  response = requests.post(url, json=payload, headers=headers)
+
+  print(response.json())
+  ```
+
+  ```javascript JavaScript theme={null}
+  const url = "https://api.apimart.ai/v1/images/generations";
+
+  const payload = {
+    model: "flux-2-flex",
+    prompt: "一只蓝色的猫在草地上",
+    resolution: "1K",
+    size: "16:9"
+  };
+
+  const headers = {
+    "Authorization": "Bearer <token>",
+    "Content-Type": "application/json"
+  };
+
+  fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify(payload)
+  })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
+  ```
+</RequestExample>
+
+<ResponseExample>
+  ```json 200 theme={null}
+  {
+    "code": 200,
+    "data": [
+      {
+        "status": "submitted",
+        "task_id": "task_01KFG5BBFNK1YQDTJDZY0P0QT2"
+      }
+    ]
+  }
+  ```
+
+  ```json 400 theme={null}
+  {
+    "error": {
+      "code": 400,
+      "message": "请求参数无效",
+      "type": "invalid_request_error"
+    }
+  }
+  ```
+
+  ```json 401 theme={null}
+  {
+    "error": {
+      "code": 401,
+      "message": "身份验证失败，请检查您的API密钥",
+      "type": "authentication_error"
+    }
+  }
+  ```
+
+  ```json 402 theme={null}
+  {
+    "error": {
+      "code": 402,
+      "message": "账户余额不足，请充值后再试",
+      "type": "payment_required"
+    }
+  }
+  ```
+</ResponseExample>
+
+## 支持的模型
+
+| 模型名           | 说明                                | 计费方式           |
+| ------------- | --------------------------------- | -------------- |
+| `flux-2-flex` | Flux 2.0 Flex 图片生成模型（速度较快，适合快速迭代） | 按分辨率计费 (1K/2K) |
+| `flux-2-pro`  | Flux 2.0 Pro 图片生成模型（质量更高，细节更好）    | 按分辨率计费 (1K/2K) |
+
+## Authorizations
+
+<ParamField header="Authorization" type="string" required>
+  所有接口均需要使用Bearer Token进行认证
+
+  获取 API Key：
+
+  访问 [API Key 管理页面](https://apimart.ai/console/token) 获取您的 API Key
+
+  使用时在请求头中添加：
+
+  ```
+  Authorization: Bearer YOUR_API_KEY
+  ```
+</ParamField>
+
+## Body
+
+<ParamField body="model" type="string" required>
+  模型名称
+
+  * `flux-2-flex` - Flux 2.0 Flex 模型（速度较快，适合快速迭代）
+  * `flux-2-pro` - Flux 2.0 Pro 模型（质量更高，细节更好）
+</ParamField>
+
+<ParamField body="prompt" type="string" required>
+  图像生成的文本描述
+</ParamField>
+
+<ParamField body="resolution" type="string" default="1K">
+  图像分辨率
+
+  支持的分辨率：
+
+  * `1K` - 默认，1080p 级别
+  * `2K` - 高清，最大 2048 像素
+
+  > 支持大小写：`1k`、`1K`、`2k`、`2K` 均可
+</ParamField>
+
+<ParamField body="size" type="string" default="1:1">
+  图像宽高比
+
+  支持的宽高比：
+
+  * `1:1` - 方形（默认）
+  * `4:3` - 横向
+  * `3:4` - 纵向
+  * `16:9` - 宽屏
+  * `9:16` - 竖屏
+  * `3:2` - 经典横向
+  * `2:3` - 经典纵向
+
+  > 仅支持以上 7 种比例，传入不支持的比例会返回错误
+</ParamField>
+
+<ParamField body="image_urls" type="array">
+  参考图像的 URL 列表
+
+  **限制：**
+
+  * 最多 8 张图片
+  * 必须是公网可访问的 URL
+  * 不支持 base64 格式
+</ParamField>
+
+## 分辨率对照表
+
+| 比例     | 名称   | 1K 尺寸     | 2K 尺寸     |
+| ------ | ---- | --------- | --------- |
+| `1:1`  | 方形   | 1440×1440 | 1536×1536 |
+| `4:3`  | 横向   | 1664×1248 | 1824×1368 |
+| `3:4`  | 纵向   | 1248×1664 | 1368×1824 |
+| `16:9` | 宽屏   | 1920×1080 | 2048×1152 |
+| `9:16` | 竖屏   | 1080×1920 | 1152×2048 |
+| `3:2`  | 经典横向 | 1728×1152 | 1872×1248 |
+| `2:3`  | 经典纵向 | 1152×1728 | 1248×1872 |
+
+## 使用场景示例
+
+**基础文生图**
+
+```json  theme={null}
+{
+    "model": "flux-2-flex",
+    "prompt": "一只蓝色的猫",
+    "resolution": "1K",
+    "size": "16:9"
+}
+```
+
+**高分辨率生成**
+
+```json  theme={null}
+{
+    "model": "flux-2-pro",
+    "prompt": "精细的风景画，山川河流",
+    "resolution": "2K",
+    "size": "16:9"
+}
+```
+
+**图生图（最多 8 张参考图）**
+
+```json  theme={null}
+{
+    "model": "flux-2-flex",
+    "prompt": "将图片转换为水彩画风格",
+    "image_urls": [
+        "https://example.com/input1.jpg",
+        "https://example.com/input2.jpg"
+    ],
+    "resolution": "1K"
+}
+```
+
+## Response
+
+<ResponseField name="code" type="integer">
+  响应状态码
+</ResponseField>
+
+<ResponseField name="data" type="array">
+  返回数据数组
+
+  <Expandable title="属性">
+    <ResponseField name="status" type="string">
+      任务状态
+
+      * `submitted` - 已提交
+    </ResponseField>
+
+    <ResponseField name="task_id" type="string">
+      任务唯一标识符
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+## 注意事项
+
+1. **图片 URL 要求**：输入图片必须是公网可访问的 URL，不支持 base64
+2. **结果存储**：生成的图片会自动存储，返回的 URL 有效期 24 小时
+3. **任务轮询**：任务为异步处理，需要轮询 `/v1/tasks/{task_id}` 获取结果
+4. **输入图片限制**：最多支持 8 张参考图片

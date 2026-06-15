@@ -1,0 +1,17 @@
+### 登陆 root
+POST {{host}}/v1/auth/login
+Content-Type: application/json
+
+{
+  "username": "root",
+  "password": "kakjzzw!@#$%^"
+}
+
+### 登陆普通用户
+POST {{host}}/v1/auth/login
+Content-Type: application/json
+
+{
+  "username": "admins",
+  "password": "a123456"
+}

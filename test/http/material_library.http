@@ -1,0 +1,33 @@
+### 创建素材
+POST {{host}}/v1/material_library
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "title": "测试素材标题",
+  "content": "这是测试素材的内容\n\n**支持Markdown格式**",
+  "tags": ["测试", "示例"]
+}
+
+### 获取素材详情（包含content）
+GET {{host}}/v1/material_library/1
+Authorization: {{token}}
+
+### 更新素材
+PUT {{host}}/v1/material_library/1
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "title": "更新后的素材标题",
+  "content": "这是更新后的素材内容\n\n增加了新的内容",
+  "tags": ["测试", "更新"]
+}
+### 分页查询素材列表（不包含content）
+GET {{host}}/v1/material_library?page=1&page_size=10&title=&tag=
+Authorization: {{token}}
+
+### 删除素材
+DELETE {{host}}/v1/material_library/1
+Content-Type: application/json
+Authorization: {{token}}

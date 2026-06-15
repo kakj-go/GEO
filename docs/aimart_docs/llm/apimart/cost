@@ -1,0 +1,296 @@
+Details
+Call Information
+Model:
+gpt-5
+Provider:
+288
+Response Time:
+5585 /ms
+Throughput:
+75.83 tokens / s
+Finish Reason:
+-
+Consumption Information
+Input Tokens:
+26
+Cache Hit Tokens:
+0
+Output Tokens:
+455
+Input Cost:
+$0.000026
+Output Cost:
+$0.003640
+Total Cost:
+$0.003666
+
+
+
+Details
+Call Information
+Model:
+gpt-5-mini
+Provider:
+281
+Response Time:
+3447 /ms
+Throughput:
+59.60 tokens / s
+Finish Reason:
+-
+Consumption Information
+Input Tokens:
+26
+Cache Hit Tokens:
+0
+Output Tokens:
+298
+Input Cost:
+$0.000005
+Output Cost:
+$0.000477
+Total Cost:
+$0.000482
+
+
+Details
+Call Information
+Model:
+gpt-5-nano
+Provider:
+281
+Response Time:
+6054 /ms
+Throughput:
+102.57 tokens / s
+Finish Reason:
+-
+Consumption Information
+Input Tokens:
+26
+Cache Hit Tokens:
+0
+Output Tokens:
+718
+Input Cost:
+$0.000001
+Output Cost:
+$0.000230
+Total Cost:
+$0.000230
+
+
+
+Details
+Call Information
+Model:
+claude-sonnet-4-5-20250929
+Provider:
+271
+Response Time:
+5865 /ms
+Throughput:
+53.60 tokens / s
+Finish Reason:
+-
+Consumption Information
+Input Tokens:
+34
+Cache Hit Tokens:
+0
+Output Tokens:
+268
+Input Cost:
+$0.000082
+Output Cost:
+$0.003216
+Total Cost:
+$0.003298
+
+
+
+Details
+Call Information
+Model:
+claude-haiku-4-5-20251001
+Provider:
+271
+Response Time:
+3869 /ms
+Throughput:
+74.00 tokens / s
+Finish Reason:
+-
+Consumption Information
+Input Tokens:
+34
+Cache Hit Tokens:
+0
+Output Tokens:
+296
+Input Cost:
+$0.000027
+Output Cost:
+$0.001184
+Total Cost:
+$0.001212
+
+Details
+Call Information
+Model:
+claude-sonnet-4-5-20250929-thinking
+Provider:
+271
+Response Time:
+5696 /ms
+Throughput:
+40.00 tokens / s
+Finish Reason:
+-
+Consumption Information
+Input Tokens:
+64
+Cache Hit Tokens:
+0
+Output Tokens:
+240
+Input Cost:
+$0.000154
+Output Cost:
+$0.002880
+Total Cost:
+$0.003034
+
+
+Details
+Call Information
+Model:
+gemini-2.5-pro
+Provider:
+272
+Response Time:
+11413 /ms
+Throughput:
+90.57 tokens / s
+Finish Reason:
+-
+Consumption Information
+Input Tokens:
+14
+Cache Hit Tokens:
+0
+Output Tokens:
+1268
+Input Cost:
+$0.000014
+Output Cost:
+$0.010144
+Total Cost:
+$0.010158
+
+
+Details
+Call Information
+Model:
+gemini-2.5-flash
+Provider:
+272
+Response Time:
+5590 /ms
+Throughput:
+123.86 tokens / s
+Finish Reason:
+-
+Consumption Information
+Input Tokens:
+14
+Cache Hit Tokens:
+0
+Output Tokens:
+867
+Input Cost:
+$0.000003
+Output Cost:
+$0.001734
+Total Cost:
+$0.001738
+
+
+Details
+Call Information
+Model:
+gemini-2.5-pro-thinking
+Provider:
+272
+Response Time:
+2466 /ms
+Throughput:
+90.75 tokens / s
+Finish Reason:
+-
+Consumption Information
+Input Tokens:
+14
+Cache Hit Tokens:
+0
+Output Tokens:
+1452
+Input Cost:
+$0.000014
+Output Cost:
+$0.011616
+Total Cost:
+$0.011630
+
+Details
+Call Information
+Model:
+gemini-2.5-flash-lite
+Provider:
+272
+Response Time:
+470 /ms
+Throughput:
+13.00 tokens / s
+Finish Reason:
+-
+Consumption Information
+Input Tokens:
+14
+Cache Hit Tokens:
+0
+Output Tokens:
+13
+Input Cost:
+$0.000001
+Output Cost:
+$0.000004
+Total Cost:
+$0.000006
+
+
+Details
+Call Information
+Model:
+deepseek-v3-0324
+Provider:
+264
+Response Time:
+766 /ms
+Throughput:
+32.80 tokens / s
+Finish Reason:
+-
+Consumption Information
+Input Tokens:
+16
+Cache Hit Tokens:
+0
+Output Tokens:
+164
+Input Cost:
+$0.000026
+Output Cost:
+$0.001050
+Total Cost:
+$0.001076

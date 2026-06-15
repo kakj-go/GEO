@@ -1,0 +1,38 @@
+### 获取网站可登录信息
+GET {{host}}/v1/website_login_context/get_webside_infos
+Authorization: {{token}}
+
+### 创建网页登录上下文
+POST {{host}}/v1/website_login_context
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "platform": "xiao_hong_shu",
+  "purpose": "blog",
+  "browser_context": "{}",
+  "status": 1
+}
+
+### 更新网页登录上下文
+PUT {{host}}/v1/website_login_context/1
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "browser_context": "{\"name\": 1}",
+  "tags": ["1" , "2"]
+}
+
+### 分页查询
+GET {{host}}/v1/website_login_context?page=1&page_size=10&platform=&purpose=&tag=
+Authorization: {{token}}
+
+### 删除
+DELETE {{host}}/v1/website_login_context/1
+Content-Type: application/json
+Authorization: {{token}}
+
+### 获取详情
+GET {{host}}/v1/website_login_context/8
+Authorization: {{token}}

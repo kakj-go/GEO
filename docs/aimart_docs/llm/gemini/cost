@@ -1,0 +1,105 @@
+Details
+Call Information
+Model:
+gemini-2.5-flash
+Provider:
+272
+Response Time:
+-1000 /ms
+Throughput:
+134.11 tokens / s
+Finish Reason:
+-
+Consumption Information
+Input Tokens:
+5
+Cache Hit Tokens:
+0
+Output Tokens:
+1207
+Input Cost:
+$0.000001
+Output Cost:
+$0.002414
+Total Cost:
+$0.002416
+
+
+
+Details
+Call Information
+Model:
+gemini-2.5-pro
+Provider:
+272
+Response Time:
+-1000 /ms
+Throughput:
+95.38 tokens / s
+Finish Reason:
+-
+Consumption Information
+Input Tokens:
+5
+Cache Hit Tokens:
+0
+Output Tokens:
+2003
+Input Cost:
+$0.000005
+Output Cost:
+$0.016024
+Total Cost:
+$0.016030
+
+Details
+Call Information
+Model:
+gemini-2.5-flash-lite
+Provider:
+272
+Response Time:
+-1000 /ms
+Throughput:
+207.00 tokens / s
+Finish Reason:
+-
+Consumption Information
+Input Tokens:
+5
+Cache Hit Tokens:
+0
+Output Tokens:
+207
+Input Cost:
+$0.000000
+Output Cost:
+$0.000066
+Total Cost:
+$0.000066
+
+Details
+Call Information
+Model:
+gemini-2.5-pro-thinking
+Provider:
+272
+Response Time:
+-1000 /ms
+Throughput:
+76.88 tokens / s
+Finish Reason:
+-
+Consumption Information
+Input Tokens:
+5
+Cache Hit Tokens:
+0
+Output Tokens:
+1999
+Input Cost:
+$0.000005
+Output Cost:
+$0.015992
+Total Cost:
+$0.015998
