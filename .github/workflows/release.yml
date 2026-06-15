@@ -37,7 +37,7 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
 
       - name: Install frontend dependencies
-        run: npm ci
+        run: npm install --no-audit --no-fund
 
       - name: Build Windows app (backend + UI + installer)
         run: npm run dist-win
@@ -71,7 +71,7 @@ jobs:
 
       - name: Install frontend dependencies
         working-directory: front
-        run: npm ci
+        run: npm install --no-audit --no-fund
 
       - name: Build React UI
         working-directory: front
