@@ -11,6 +11,7 @@
     "build-go": "node -e \"require('fs').mkdirSync('resources_ext',{recursive:true})\" && cd .. && go build -ldflags=\"-H windowsgui\" -o front/resources_ext/backend.exe ./cmd/app/main.go",
     "build-go-mac": "node -e \"require('fs').mkdirSync('resources_ext',{recursive:true})\" && cd .. && go build -o front/resources_ext/backend ./cmd/app/main.go",
     "dist-win": "npm run build-go && npm run build-react && electron-builder --win --x64",
+    "dist-mac": "npm run build-go-mac && npm run build-react && electron-builder --mac --publish never",
     "dev": "npm run backup-release && npm run build-go && npm run build-react && electron-builder --win --x64",
     "electron": "electron public/electron.js",
     "start": "react-scripts start",

@@ -1,0 +1,100 @@
+name: Release Desktop App
+
+# Triggers on pushing a version tag, e.g. `git tag v1.0.2 && git push origin v1.0.2`.
+# You can also run it manually from the Actions tab (workflow_dispatch).
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  GO_VERSION: "1.25"
+  NODE_VERSION: "20"
+  CGO_ENABLED: "0"
+
+jobs:
+  # ============================================================
+  # Windows installer (.exe / NSIS) — built on a Windows runner
+  # ============================================================
+  build-windows:
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: front
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: ${{ env.GO_VERSION }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Build Windows app (backend + UI + installer)
+        run: npm run dist-win
+
+      - name: Upload to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            front/release/*.exe
+            front/release/*.blockmap
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # ============================================================
+  # macOS app (.dmg) — built on a macOS runner.
+  # Builds BOTH Apple Silicon (arm64) and Intel (x64) installers,
+  # each bundled with a matching-arch Go backend.
+  # ============================================================
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: ${{ env.GO_VERSION }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install frontend dependencies
+        working-directory: front
+        run: npm ci
+
+      - name: Build React UI
+        working-directory: front
+        run: npm run build-react
+
+      - name: Build Apple Silicon (arm64) dmg
+        working-directory: front
+        run: |
+          mkdir -p resources_ext
+          (cd .. && GOARCH=arm64 go build -o front/resources_ext/backend ./cmd/app/main.go)
+          npx electron-builder --mac dmg --arm64 --publish never
+
+      - name: Build Intel (x64) dmg
+        working-directory: front
+        run: |
+          (cd .. && GOARCH=amd64 go build -o front/resources_ext/backend ./cmd/app/main.go)
+          npx electron-builder --mac dmg --x64 --publish never
+
+      - name: Upload to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            front/release/*.dmg
+            front/release/*.blockmap
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
